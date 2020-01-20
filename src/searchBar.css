@@ -1,0 +1,45 @@
+div {
+    text-align: center;
+}
+
+#page {
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+}
+
+#searchBox {
+    display: inline-flex;
+    margin: auto;
+    border: solid;
+    border-color: black;
+    border-radius: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#platformSelect {
+    display: inline-block;
+}
+
+#platformSelect button {
+    border: none;
+    background-color: white;
+}
+
+input {
+    display:inline-block;
+    width: 60vw;
+    font-size: 18px;
+    border: none;
+    outline-width: 0;
+}
+
+#searchButton {
+    border: none;
+    background-color: white;
+}
+
+#searchIcon {
+    position: relative;
+}
