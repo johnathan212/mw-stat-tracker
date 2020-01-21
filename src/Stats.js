@@ -1,12 +1,10 @@
 import React from 'react'
-import SearchBar from './SearchBar'
 
 var Stats = function(props) {
-    if(props.stats){
+    if(props.stats.status !== 'error'){
         return (
             // <h1> {props.stats.data.username}{console.log(props.stats)}</h1>
             <div id="playerStats">
-                <SearchBar/>
                 <h1> {props.stats.data.username} </h1>
                 <div id="killStats">
                     <p> {props.stats.data.lifetime.all.properties.kdRatio} </p>
@@ -17,7 +15,7 @@ var Stats = function(props) {
             </div>
         );
     } else {
-        return <div></div>
+        return <div><h1>Player {props.username} not found</h1></div>
     }
 }
 

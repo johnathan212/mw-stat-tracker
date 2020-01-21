@@ -13,33 +13,40 @@ div {
     margin: auto;
     border: solid;
     border-color: black;
-    border-radius: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-radius: 25px;
+    padding-left: 18px;
+    padding-right: 19px;
+    align-items: center;
 }
 
 #platformSelect {
-    display: inline-block;
+    display: inline-flex;
 }
 
 #platformSelect button {
+    display: inline-flex;
+    font-size: 25px;
     border: none;
     background-color: white;
 }
 
 input {
-    display:inline-block;
-    width: 60vw;
+    display: inline-flex;
+    width: 50vw;
+    height: 40px;
     font-size: 18px;
     border: none;
     outline-width: 0;
 }
 
+form {
+    display: inline-flex;
+}
+
 #searchButton {
+    display: inline-flex;
+    font-size: 25px;
     border: none;
     background-color: white;
 }
 
-#searchIcon {
-    position: relative;
-}

@@ -13,8 +13,8 @@ class App extends Component {
     this.search = this.search.bind(this)
   }
 
-  handleDropdownChange = event => {
-    this.setState({ platform: event.target.value })
+  handleDropdownChange = (event, platform) => {
+    this.setState({ platform: platform}, () => {console.log(this.state.platform)})
   }
 
   handleChange = event => {
@@ -23,10 +23,9 @@ class App extends Component {
 
   async search(event) {
     event.preventDefault()
-    // let name = this.state.username
-    // let name = "john%2314729"
+    let encodedURIusername = encodeURIComponent(this.state.username)
 
-    await Axios.get('https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/battle/gamer/iShot%2321899/profile/type/mp')
+    await Axios.get(`https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/${this.state.platform}/gamer/${encodedURIusername}/profile/type/mp`)
       .then(result => {
         const data = result.data
         this.setState({ stats: data })
@@ -35,10 +34,11 @@ class App extends Component {
   }
 
   render() {
-    var page = <div className="page"> <SearchBar handleChange={this.handleChange} search={this.search}/> </div>
+    let searchBar = <SearchBar handleChange={this.handleChange} handleDropdownChange={this.handleDropdownChange} search={this.search} platform={this.state.platform}/>;
+    var page = <div className="page"> {searchBar} </div>
     if(this.state.stats) {
       page = <div className="page">
-        <SearchBar handleChange={this.handleChange} handleDropdownChange={this.handleDropdownChange} search={this.search}/>
+        {searchBar}
         <Stats stats={this.state.stats}/>
       </div>
     }
