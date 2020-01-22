@@ -1,28 +1,71 @@
-import React from 'react'
+import React, { Component } from 'react'
 import './searchBar.css'
-import {FaSearch, FaBluetooth} from 'react-icons/fa'
+import {FaSearch} from 'react-icons/fa'
 import {FaBattleNet} from 'react-icons/fa'
 import {FaXbox} from 'react-icons/fa'
 import {FaPlaystation} from 'react-icons/fa'
 
-var SearchBar = function(props){
-  return (
-    <div id="page">
-      <div id="searchBox"> 
-        <div id="platformSelect">
-          <button onClick={ (e) => props.handleDropdownChange(e, 'battle')}><FaBattleNet/></button>
-          <button onClick={ (e) => props.handleDropdownChange(e, 'xbox')}><FaXbox/></button>
-          <button onClick={ (e) => props.handleDropdownChange(e, 'psn')}><FaPlaystation/></button>
+class SearchBar extends Component{
+  constructor(props) {
+    super(props)
+    this.state = {platform: 'battle'}
+    this.handleChange = this.handleChange.bind(this)
+    this.handleDropdownChange = this.handleDropdownChange.bind(this)
+
+    this.activeStyle = {
+      color: 'gray'
+    }
+    this.inactiveStyle = {
+      color: 'black'
+    }
+  }
+
+  handleDropdownChange = (event, platform) => {
+    this.setState({ platform: platform}, () => {console.log(this.state.platform)})
+  }
+
+  handleChange = event => {
+    this.setState({ username: event.target.value })
+  }
+
+
+
+  render() {
+    return (
+      <div id="page">
+        <div id="searchBox"> 
+          <div id="platformSelect">
+            <button
+              onClick={ (e) => this.handleDropdownChange(e, 'battle')}
+              style={(this.state.platform === 'battle') ? this.activeStyle : this.inactiveStyle}
+            >
+              <FaBattleNet/>
+            </button>
+            <button 
+              onClick={ (e) => this.handleDropdownChange(e, 'xbox')}
+              style={(this.state.platform === 'xbox') ? this.activeStyle : this.inactiveStyle}
+            >
+              <FaXbox/>
+            </button>
+            <button
+              onClick={ (e) => this.handleDropdownChange(e, 'psn')}
+              style={(this.state.platform === 'psn') ? this.activeStyle : this.inactiveStyle}
+            >
+              <FaPlaystation/>
+            </button>
+          </div>
+          <div id="form">
+            <form>
+              <input type="text"
+                onChange={ (e) => this.handleChange(e) }
+              />
+              <button id="searchButton" onClick={ (event) => this.props.search(event, this.state.username, this.state.platform)}><FaSearch id="searchIcon"/></button>
+            </form>
+          </div>
         </div>
-        <form>
-          <input type="text"
-            onChange={ (e) => props.handleChange(e) }
-          />
-          <button id="searchButton" onClick={ (e) => props.search(e)}><FaSearch id="searchIcon"/></button>
-        </form>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
 export default SearchBar

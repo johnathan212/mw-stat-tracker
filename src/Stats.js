@@ -15,7 +15,7 @@ var Stats = function(props) {
             </div>
         );
     } else {
-        return <div><h1>Player {props.username} not found</h1></div>
+    return <div><h1> INVALID PLAYER NAME</h1></div>
     }
 }
 
