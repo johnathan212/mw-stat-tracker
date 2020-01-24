@@ -1,4 +1,7 @@
 #playerStats {
     font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
+    background-color: #ad9898;
+    text-transform: capitalize;
+    border-color: white;
 }

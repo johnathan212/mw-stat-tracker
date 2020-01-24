@@ -1,4 +1,6 @@
 import React from 'react'
+import './Stats'
+import StatDisplay from './StatDisplay'
 
 var Stats = function(props) {
     if(props.stats.status !== 'error'){
@@ -7,7 +9,7 @@ var Stats = function(props) {
             <div id="playerStats">
                 <h1> {props.stats.data.username} </h1>
                 <div id="killStats">
-                    <p> {props.stats.data.lifetime.all.properties.kdRatio} </p>
+                    <p> {props.stats.data.lifetime.all.properties.kdRatio.toFixed(2)} KD RATIO</p>
                 </div>
                 <div id ="gameStats">
 

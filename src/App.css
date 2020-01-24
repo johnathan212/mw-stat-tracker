@@ -4,4 +4,7 @@
   justify-content: center;
   flex-direction: column;
   font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
+  background-color: #121212;
+  color: white;
+  text-transform: capitalize;
 }

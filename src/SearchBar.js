@@ -13,10 +13,10 @@ class SearchBar extends Component{
     this.handleDropdownChange = this.handleDropdownChange.bind(this)
 
     this.activeStyle = {
-      color: 'gray'
+      color: 'white'
     }
     this.inactiveStyle = {
-      color: 'black'
+      color: 'gray'
     }
   }
 

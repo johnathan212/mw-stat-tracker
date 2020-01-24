@@ -6,19 +6,19 @@ div {
     height: 100vh;
     display: flex;
     align-items: flex-start;
-    background-color: black;
+    background-color: #121212;
 }
 
 #searchBox {
     display: inline-flex;
     margin: auto;
     border: solid;
-    border-color: black;
+    border-color: white;
+    border-width: 2px;
     border-radius: 25px;
     padding-left: 18px;
-    padding-right: 18px;
     align-items: center;
-    background: lightgray;
+    background: #121212;
 }
 
 #form {
@@ -27,6 +27,7 @@ div {
 
 #platformSelect {
     display: inline-flex;
+    padding-right: 12px;
 }
 
 #platformSelect button {
@@ -43,13 +44,11 @@ input {
     width: 50vw;
     height: 40px;
     font-size: 20px;
-    border-color: black;
+    border: none;
     outline-width: 0;
-    border-top-width: 0px;
-    border-bottom-width: 0px;
-    border-left-width: 2px;
-    border-right-width: 2px;
     padding-left: 5px;
+    background-color: transparent;
+    color: white;
 }
 
 form {
@@ -60,8 +59,11 @@ form {
     display: inline-flex;
     font-size: 22px;
     border: none;
+    color: white;
+    border-radius: 0 25px 25px 0;
     background-color: transparent;
     outline: none;
+    padding-right: 20px;
     cursor: pointer;
 }
 
