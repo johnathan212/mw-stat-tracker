@@ -9,7 +9,17 @@ var Stats = function(props) {
             <div id="playerStats">
                 <h1> {props.stats.data.username} </h1>
                 <div id="killStats">
-                    <p> {props.stats.data.lifetime.all.properties.kdRatio.toFixed(2)} KD RATIO</p>
+                    <div>
+                        <p id="kdRatio"> {props.stats.data.lifetime.all.properties.kdRatio.toFixed(2)} <br></br>KD RATIO</p>
+                    </div>
+                    <div>
+                        <h1>KILLS</h1>
+                        <p> {props.stats.data.lifetime.all.properties.kills}</p>
+                    </div>
+                    <div>
+                        <h1>DEATHS</h1>
+                        <p> {props.stats.data.lifetime.all.properties.deaths}</p>
+                    </div>
                 </div>
                 <div id ="gameStats">
 

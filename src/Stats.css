@@ -1,7 +1,14 @@
 #playerStats {
     font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
+    font-size: 15px;
     background-color: #ad9898;
     text-transform: capitalize;
     border-color: white;
+}
+
+#killStats {
+}
+
+#kdRatio {
 }
