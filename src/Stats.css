@@ -1,14 +1,56 @@
 #playerStats {
     font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
-    font-size: 15px;
-    background-color: #ad9898;
+    font-size: 30px;
+    background-color: #121212;
     text-transform: capitalize;
     border-color: white;
+    min-height: 75vh;
+}
+
+h2 {
+    font-size: 20px;
+    border-bottom: solid;
+    padding-bottom: 15px;
+    border-width: 1px;
+    margin-bottom: -10px;
+}
+
+h3 {
+    font-size: 15px;
+}
+
+p {
+    font-size: 30px;
+    color: #57ced4;
+}
+
+p1 {
+    font-size: 60px;
+    color: #57ced4;
 }
 
 #killStats {
+    display: inline-flex;
+    justify-content: space-evenly;
+    width: 50vw;
+    flex-direction: row;
+    border: solid;
+    border-width: 1px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 #kdRatio {
+    align-self: center;
+}
+
+#kills{
+    display: inline;
+    min-width: 30px;
+}
+
+#deaths{
+    display: inline;
+    min-width: 50px;
 }

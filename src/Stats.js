@@ -1,29 +1,51 @@
 import React from 'react'
-import './Stats'
-import StatDisplay from './StatDisplay'
+import './Stats.css'
 
 var Stats = function(props) {
-    if(props.stats.status !== 'error'){
+    if(props.stats.status !== 'error' || props.stats === undefined){
+        const lifetimeStats = props.stats.data.lifetime.all.properties
+        let rankStyles = {
+            background: 'url("https://www.callofduty.com/cdn/app/icons/mw/ranks/mp/icon_rank_66.png")',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repeat'
+        }
+
         return (
             // <h1> {props.stats.data.username}{console.log(props.stats)}</h1>
             <div id="playerStats">
                 <h1> {props.stats.data.username} </h1>
+                <div id="rankImage" style={rankStyles}>rank</div>
                 <div id="killStats">
-                    <div>
-                        <p id="kdRatio"> {props.stats.data.lifetime.all.properties.kdRatio.toFixed(2)} <br></br>KD RATIO</p>
+                    <div id="winLoss">
+                        <h2>WINS</h2>
+                        <p> {lifetimeStats.wins}</p>
+                        <h2>LOSSES</h2>
+                        <p>{lifetimeStats.losses}</p>
                     </div>
-                    <div>
-                        <h1>KILLS</h1>
-                        <p> {props.stats.data.lifetime.all.properties.kills}</p>
+                    <div id="score">
+                        <h2>SCORE</h2>
+                        <p>{lifetimeStats.score}</p>
+                        <h2>BEST SPM</h2>
+                        <p>{lifetimeStats.bestSPM}</p>
                     </div>
-                    <div>
-                        <h1>DEATHS</h1>
-                        <p> {props.stats.data.lifetime.all.properties.deaths}</p>
+                    <div id="kdRatio">
+                        <p1> {lifetimeStats.kdRatio.toFixed(2)}</p1>
+                        <h3>KD RATIO</h3>
+                    </div>
+                    <div id="kills">
+                        <h2>KILLS</h2>
+                        <p> {lifetimeStats.kills}</p>
+                        <h2>DEATHS</h2>
+                        <p> {lifetimeStats.deaths}</p>
+                    </div>
+                    <div id="winLossAccuracy">
+                        <h2>W/L RATIO</h2>
+                        <p> {lifetimeStats.wlRatio}</p>
+                        <h2>ACCURACY</h2>
+                        <p> {(Math.round(lifetimeStats.accuracy * 100))}%</p>
                     </div>
                 </div>
-                <div id ="gameStats">
-
-                </div>
+                
             </div>
         );
     } else {
