@@ -2,13 +2,6 @@ div {
     text-align: center;
 }
 
-#page {
-    height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    background-color: #121212;
-}
-
 #searchBox {
     display: inline-flex;
     margin: auto;

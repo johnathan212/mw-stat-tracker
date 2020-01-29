@@ -1,4 +1,7 @@
 #playerStats {
+    display: inline-flex;
+    flex-direction: column;
+    align-content: center;
     font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
     font-size: 30px;
@@ -18,6 +21,7 @@ h2 {
 
 h3 {
     font-size: 15px;
+    color: white;
 }
 
 p {
@@ -25,32 +29,114 @@ p {
     color: #57ced4;
 }
 
-p1 {
-    font-size: 60px;
-    color: #57ced4;
-}
-
-#killStats {
+#level {
     display: inline-flex;
-    justify-content: space-evenly;
-    width: 50vw;
     flex-direction: row;
-    border: solid;
-    border-width: 1px;
-    padding-left: 10px;
-    padding-right: 10px;
+    justify-content: center;
+    min-height: auto;
 }
 
-#kdRatio {
+#levelText {
     align-self: center;
 }
 
-#kills{
-    display: inline;
-    min-width: 30px;
+#winLoss {
+    display: inline-flex;
+    flex-direction: column;
 }
 
-#deaths{
-    display: inline;
-    min-width: 50px;
+#score {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#kills {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#winLossAccuracy {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#lifetimeStats {
+    display: inline-flex;
+    align-self: center;
+    flex-direction: column;
+    border: solid;
+    border-width: 1px;
+    width: 70vw;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #292929;
+}
+#killStats {
+    display: inline-flex;
+    align-self: center;
+    justify-content: space-evenly;
+    width: 70vw;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#kdRatio {
+    display: inline-flex;
+    align-self: center;
+    flex-direction: column;
+    flex-shrink: 2;
+    font-size: 85px;
+    color: #57ced4;
+}
+
+.Collapsible {
+    font-size: 18px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: -25px;
+}
+
+.Collapsible h1 {
+    color: white;
+    font-size: 20px;
+    margin: auto;
+    text-align: left;
+}
+.Collapsible p {
+    padding-left: 10px;
+    color: #57ced4;
+    font-size: 20px;
+    text-align: right;
+}
+
+#moreStats {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.moreStatsElement {
+    display: inline-flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.moreStatsElementLeft {
+    align-self: flex-start;
+    text-align: left;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.moreStatsElementRight {
+    align-self: flex-end;
+    text-align: right;
+}
+
+.moreStatsColumn {
+    display: inline-flex;
+    flex-direction: column;
+    align-content: space-between;
+    justify-content: space-between;
+    margin: 20px;
 }
