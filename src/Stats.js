@@ -79,6 +79,19 @@ var Stats = function(props) {
                                         <p>{lifetimeStats.assists}</p>
                                     </div>
                                 </div>
+                                <div className="moreStatsElement">
+                                    <div className="moreStatsElementLeft">
+                                        <h1> Time Played: </h1>
+                                    </div>
+                                    <div className="moreStatsElementRight">
+                                        <p>
+                                            {(lifetimeStats.timePlayedTotal / 86400).toFixed(0)}
+                                            <span style={{color: 'white'}}>D &nbsp;</span>
+                                            {Math.ceil((lifetimeStats.timePlayedTotal / 86400) / 3600)}
+                                            <span style={{color: 'white'}}>H</span>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                             <div className="moreStatsColumn">
                                 <div className="moreStatsElement">
@@ -103,6 +116,14 @@ var Stats = function(props) {
                                     </div>
                                     <div className="moreStatsElementRight">
                                         <p>{lifetimeStats.bestKills}</p>
+                                    </div>
+                                </div>
+                                <div className="moreStatsElement">
+                                    <div className="moreStatsElementLeft">
+                                        <h1> SCORE/GAME: </h1>
+                                    </div>
+                                    <div className="moreStatsElementRight">
+                                        <p>{lifetimeStats.scorePerGame}</p>
                                     </div>
                                 </div>
                             </div>
@@ -131,13 +152,21 @@ var Stats = function(props) {
                                         <p>{lifetimeStats.bestScore}</p>
                                     </div>
                                 </div>
+                                <div className="moreStatsElement">
+                                    <div className="moreStatsElementLeft">
+                                        <h1> SPM: </h1>
+                                    </div>
+                                    <div className="moreStatsElementRight">
+                                        <p>{Math.round(lifetimeStats.scorePerMinute)}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </Collapsible>
                 </div>
-                {/* <div id="weaponStats">
+                <div id="weaponStats">
                     content
-                </div> */}
+                </div>
                 <br></br>
             </div>
         );
