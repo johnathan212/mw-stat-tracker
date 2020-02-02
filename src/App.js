@@ -3,6 +3,7 @@ import SearchBar from './SearchBar';
 import Stats from './Stats';
 import './App.css';
 import Axios from 'axios';
+import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {
@@ -29,7 +30,11 @@ class App extends Component {
     if(this.state.stats) {
       page = <div className="page">
         {searchBar}
-        <Stats stats={this.state.stats}/>
+        <Router>
+            <Route path="/:username" render={props =>
+              (<Stats {...props} stats={this.state.stats}/>)
+            }/>
+        </Router>
       </div>
     }
     return page

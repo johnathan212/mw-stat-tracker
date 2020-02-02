@@ -4,8 +4,9 @@ import {FaSearch} from 'react-icons/fa'
 import {FaBattleNet} from 'react-icons/fa'
 import {FaXbox} from 'react-icons/fa'
 import {FaPlaystation} from 'react-icons/fa'
+import { Link, BrowserRouter as Router } from 'react-router-dom'
 
-class SearchBar extends Component{
+class SearchBar extends Component {
   constructor(props) {
     super(props)
     this.state = {platform: 'battle'}
@@ -59,7 +60,11 @@ class SearchBar extends Component{
               <input type="text"
                 onChange={ (e) => this.handleChange(e) }
               />
-              <button id="searchButton" onClick={ (event) => this.props.search(event, this.state.username, this.state.platform)}><FaSearch id="searchIcon"/></button>
+              <Router>
+                <Link to={"/" + this.state.username}>
+                  <button id="searchButton" onClick={ (event) => this.props.search(event, this.state.username, this.state.platform)}><FaSearch id="searchIcon"/></button>
+                </Link>
+              </Router>
             </form>
           </div>
         </div>
