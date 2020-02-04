@@ -1,18 +1,36 @@
 import React, {Component} from 'react'
 import './Stats.css'
 import Collapsible from 'react-collapsible'
+import Axios from 'axios';
 
 class Stats extends Component {
     constructor(props) {
         super(props)
         console.log("working")
         this.state = {
-            username: props.match.params.username
+            platform: this.props.match.params.platform,
+            username: this.props.match.params.username
         }
     }
 
+    componentDidMount() {
+        this.search(this.state.platform, this.state.username)
+    }
+
+    async search(username, platform) {
+        let encodedURIusername = encodeURIComponent(username)
+    
+        await Axios.get(`https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/${platform}/gamer/${encodedURIusername}/profile/type/mp`)
+          .then(result => {
+            const data = result.data
+            this.setState({ stats: data })
+            // console.log(this.state.stats)
+        })
+    }
+
     render() {
-        console.log(this.props)
+        console.log(this.state)
+        
         if(this.props.stats.status !== 'error' || this.props.stats === undefined){
             const lifetimeStats = this.props.stats.data.lifetime.all.properties
             let rankStyles = {
