@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import SearchBar from './SearchBar';
 import Stats from './Stats';
 import './App.css';
-import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
 
 class App extends Component {
 

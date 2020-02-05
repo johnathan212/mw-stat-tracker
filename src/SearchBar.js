@@ -32,6 +32,7 @@ class SearchBar extends Component {
   render() {
     const SearchButton = withRouter(({ history }) => (
       <button
+        id='searchButton'
         type='button'
         onClick={() => { 
           history.push('/' + this.state.platform + '/user/' + encodeURIComponent(this.state.username)) }}
