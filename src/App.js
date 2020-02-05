@@ -5,10 +5,6 @@ import './App.css';
 import {Route, BrowserRouter as Router, Switch} from 'react-router-dom';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { platform: 'battle'}
-  }
 
   render() {
     let searchBar = <SearchBar/>;

@@ -14,13 +14,13 @@ class Stats extends Component {
     }
 
     componentDidMount() {
-        this.search(this.state.platform, this.state.username)
+        this.search(this.state.username, this.state.platform)
     }
 
     async search(username, platform) {
-        let encodedURIusername = encodeURIComponent(username)
+        console.log(platform)
     
-        await Axios.get(`https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/${platform}/gamer/${encodedURIusername}/profile/type/mp`)
+        await Axios.get(`https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/${platform}/gamer/${username}/profile/type/mp`)
           .then(result => {
             const data = result.data
             this.setState({ stats: data })
@@ -31,7 +31,13 @@ class Stats extends Component {
     render() {
         console.log(this.state)
         
-        if(this.props.stats.status !== 'error' || this.props.stats === undefined){
+        if(this.props.stats === undefined) {
+            return (
+                <div>Loading</div>
+            )
+        }
+
+        if(this.props.stats.status !== 'error'){
             const lifetimeStats = this.props.stats.data.lifetime.all.properties
             let rankStyles = {
                 height: '100px',

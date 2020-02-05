@@ -33,7 +33,7 @@ class SearchBar extends Component {
     const SearchButton = withRouter(({ history }) => (
       <button
         type='button'
-        onClick={() => { history.push('/' + this.state.platform + '/user/' + this.state.username) }}
+        onClick={() => { history.push('/' + this.state.platform + '/user/' + encodeURIComponent(this.state.username)) }}
       >
         <FaSearch id="searchIcon"/>
       </button>
