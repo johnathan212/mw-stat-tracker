@@ -10,15 +10,13 @@ class App extends Component {
     let searchBar = <SearchBar/>;
     
     return (
-      <Router>
         <div className="page">
           {searchBar}
           <Switch>
-            <Route exact path="/" > empty styff </Route>
+            <Route exact path='/' > empty styff </Route>
             <Route path="/:platform/user/:username" component={Stats}/>
           </Switch>
         </div>
-      </Router>
     )
   }
 }

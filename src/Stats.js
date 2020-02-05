@@ -9,40 +9,44 @@ class Stats extends Component {
         console.log("working")
         this.state = {
             platform: this.props.match.params.platform,
-            username: this.props.match.params.username
+            username: this.props.match.params.username,
+            loading: false
         }
     }
-
     componentDidMount() {
         this.search(this.state.username, this.state.platform)
     }
+    componentDidUpdate(prevProps) {
+        if(prevProps.location.pathname !== this.props.location.pathname) {
+            this.setState({
+                platform: this.props.match.params.platform,
+                username: this.props.match.params.username
+            })
+            this.search(this.props.match.params.username, this.props.match.params.platform)
+        }
+    }
 
     async search(username, platform) {
-        console.log(platform)
+        this.setState({loading: true})
     
         await Axios.get(`https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/${platform}/gamer/${username}/profile/type/mp`)
           .then(result => {
             const data = result.data
             this.setState({ stats: data })
-            // console.log(this.state.stats)
         })
+        this.setState({loading: false})
     }
 
     render() {
-        console.log(this.state)
-        
-        if(this.props.stats === undefined) {
-            return (
-                <div>Loading</div>
-            )
-        }
-
-        if(this.props.stats.status !== 'error'){
-            const lifetimeStats = this.props.stats.data.lifetime.all.properties
+        if(this.state.loading === true) {
+            return(<div>Loading</div>)
+        } else if(this.state.stats && this.state.stats.status !== "error"){
+            console.log(this.state)
+            const lifetimeStats = this.state.stats.data.lifetime.all.properties
             let rankStyles = {
                 height: '100px',
                 width: '100px',
-                background: `url("https://www.callofduty.com/cdn/app/icons/mw/ranks/mp/icon_rank_${this.props.stats.data.level}.png")`,
+                background: `url("https://www.callofduty.com/cdn/app/icons/mw/ranks/mp/icon_rank_${this.state.stats.data.level}.png")`,
                 backgroundSize: 'contain',
                 backgroundRepeat: 'no-repeat'
             }
@@ -50,35 +54,35 @@ class Stats extends Component {
             return (
                 // <h1> {props.stats.data.username}{console.log(props.stats)}</h1>
                 <div id="playerStats">
-                    <h1> {this.props.stats.data.username} </h1>
+                    <h1> {this.state.stats.data.username} </h1>
                     {/* <h1> {username} </h1> */}
                     <div id="level">
-                        <div id="levelText">LEVEL {this.props.stats.data.level} </div>
+                        <div id="levelText">LEVEL {this.state.stats.data.level} </div>
                         <div id="rankImage" style={rankStyles}></div>
                     </div>
                     <div id="lifetimeStats">
                         <div id="killStats">
                             <div id="winLoss">
                                 <h2>WINS</h2>
-                                <p> {lifetimeStats.wins}</p>
+                                <p> {lifetimeStats.wins.toLocaleString('en-US')}</p>
                                 <h2>LOSSES</h2>
-                                <p>{lifetimeStats.losses}</p>
+                                <p>{lifetimeStats.losses.toLocaleString('en-US')}</p>
                             </div>
                             <div id="score">
                                 <h2>SCORE</h2>
-                                <p>{lifetimeStats.score}</p>
+                                <p>{lifetimeStats.score.toLocaleString('en-US')}</p>
                                 <h2>BEST SPM</h2>
-                                <p>{lifetimeStats.bestSPM}</p>
+                                <p>{lifetimeStats.bestSPM.toLocaleString('en-US')}</p>
                             </div>
                             <div id="kdRatio">
-                                {lifetimeStats.kdRatio.toFixed(2)}
+                                {lifetimeStats.kdRatio.toFixed(2).toLocaleString('en-US')}
                                 <h3>KD RATIO</h3>
                             </div>
                             <div id="kills">
                                 <h2>KILLS</h2>
-                                <p> {lifetimeStats.kills}</p>
+                                <p> {lifetimeStats.kills.toLocaleString('en-US')}</p>
                                 <h2>DEATHS</h2>
-                                <p> {lifetimeStats.deaths}</p>
+                                <p> {lifetimeStats.deaths.toLocaleString('en-US')}</p>
                             </div>
                             <div id="winLossAccuracy">
                                 <h2>W/L RATIO</h2>
@@ -95,7 +99,7 @@ class Stats extends Component {
                                             <h1> HEADSHOTS: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p>{lifetimeStats.headshots}</p>
+                                            <p>{lifetimeStats.headshots.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                     <div className="moreStatsElement">
@@ -103,7 +107,7 @@ class Stats extends Component {
                                             <h1> GAMES PLAYED: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p>{lifetimeStats.totalGamesPlayed}</p>
+                                            <p>{lifetimeStats.totalGamesPlayed.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                     <div className="moreStatsElement">
@@ -111,7 +115,7 @@ class Stats extends Component {
                                             <h1> ASSISTS: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p>{lifetimeStats.assists}</p>
+                                            <p>{lifetimeStats.assists.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                     <div className="moreStatsElement">
@@ -120,9 +124,9 @@ class Stats extends Component {
                                         </div>
                                         <div className="moreStatsElementRight">
                                             <p>
-                                                {(lifetimeStats.timePlayedTotal / 86400).toFixed(0)}
+                                                {(lifetimeStats.timePlayedTotal / 86400).toFixed(0).toLocaleString('en-US')}
                                                 <span style={{color: 'white'}}>D &nbsp;</span>
-                                                {Math.ceil((lifetimeStats.timePlayedTotal / 86400) / 3600)}
+                                                {Math.ceil((lifetimeStats.timePlayedTotal / 86400) / 3600).toLocaleString('en-US')}
                                                 <span style={{color: 'white'}}>H</span>
                                             </p>
                                         </div>
@@ -134,7 +138,7 @@ class Stats extends Component {
                                             <h1> SUICIDES: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p> {lifetimeStats.suicides}</p>
+                                            <p> {lifetimeStats.suicides.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                     <div className="moreStatsElement">
@@ -150,7 +154,7 @@ class Stats extends Component {
                                             <h1> BEST KILLS: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p>{lifetimeStats.bestKills}</p>
+                                            <p>{lifetimeStats.bestKills.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                     <div className="moreStatsElement">
@@ -158,7 +162,7 @@ class Stats extends Component {
                                             <h1> SCORE/GAME: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p>{lifetimeStats.scorePerGame}</p>
+                                            <p>{lifetimeStats.scorePerGame.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -168,7 +172,7 @@ class Stats extends Component {
                                             <h1> BEST DEATHS: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p> {lifetimeStats.bestDeaths}</p>
+                                            <p> {lifetimeStats.bestDeaths.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                     <div className="moreStatsElement">
@@ -176,7 +180,7 @@ class Stats extends Component {
                                             <h1> BEST KILL STREAK: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p>{lifetimeStats.bestKillStreak}</p>
+                                            <p>{lifetimeStats.bestKillStreak.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                     <div className="moreStatsElement">
@@ -184,7 +188,7 @@ class Stats extends Component {
                                             <h1> BEST SCORE: </h1>                                   
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p>{lifetimeStats.bestScore}</p>
+                                            <p>{lifetimeStats.bestScore.toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                     <div className="moreStatsElement">
@@ -192,7 +196,7 @@ class Stats extends Component {
                                             <h1> SPM: </h1>
                                         </div>
                                         <div className="moreStatsElementRight">
-                                            <p>{Math.round(lifetimeStats.scorePerMinute)}</p>
+                                            <p>{Math.round(lifetimeStats.scorePerMinute).toLocaleString('en-US')}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +209,7 @@ class Stats extends Component {
                 </div>
             );
         } else {
-        return <div><h1> INVALID PLAYER NAME</h1></div>
+            return <div><h1> INVALID PLAYER NAME</h1></div>
         }
     }
 }

@@ -4,7 +4,7 @@ import {FaSearch} from 'react-icons/fa'
 import {FaBattleNet} from 'react-icons/fa'
 import {FaXbox} from 'react-icons/fa'
 import {FaPlaystation} from 'react-icons/fa'
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -33,7 +33,8 @@ class SearchBar extends Component {
     const SearchButton = withRouter(({ history }) => (
       <button
         type='button'
-        onClick={() => { history.push('/' + this.state.platform + '/user/' + encodeURIComponent(this.state.username)) }}
+        onClick={() => { 
+          history.push('/' + this.state.platform + '/user/' + encodeURIComponent(this.state.username)) }}
       >
         <FaSearch id="searchIcon"/>
       </button>
