@@ -13,7 +13,7 @@ class App extends Component {
         <div className="page">
           {searchBar}
           <Switch>
-            <Route exact path='/' > empty styff </Route>
+            <Route exact path='/' />
             <Route path="/:platform/user/:username" component={Stats}/>
           </Switch>
         </div>

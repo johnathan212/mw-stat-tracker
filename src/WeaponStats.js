@@ -3,12 +3,14 @@ import { useTable, useSortBy } from 'react-table'
 import styled from 'styled-components'
 import {FaSortDown, FaSortUp} from 'react-icons/fa'
 import './WeaponStats.css'
+import Collapsible from 'react-collapsible'
 
 const Styles = styled.div`
   padding: 1rem;
   display: inline-flex;
 
   table {
+    margin-top: 10px;
     border-spacing: 0;
     border: 1px solid white;
     background-color: #292929;
@@ -61,7 +63,7 @@ const weaponNameDict = {
   equip_c4: "C4",
   equip_at_mine: "AT MINE",
   equip_throwing_knife: "THROWING KNIFE",
-  equip_molotov: "MOLITOV",
+  equip_molotov: "MOLOTOV",
   iw8_lm_kilo121: "M91",
   iw8_lm_mgolf34: "MG34",
   iw8_lm_lima86: "SA87",
@@ -119,6 +121,8 @@ function Table({columns, data}) {
         },
         useSortBy
     )
+    const showNumRows = rows.slice(0, 10)
+
     return(
         <>
       <table {...getTableProps()}>
@@ -144,7 +148,7 @@ function Table({columns, data}) {
           ))}
         </thead>
         <tbody {...getTableBodyProps()}>
-          {rows.map(
+          {showNumRows.map(
             (row, i) => {
               prepareRow(row);
               return (
@@ -168,6 +172,13 @@ function getWeaponName(weaponID) {
   return String(weaponNameDict[weaponID])
 }
 
+function checkNaN(number) {
+  if(isNaN(number)) {
+    return <div style={{color: 'gray'}}>N/A</div>
+  } else {
+    return number
+  }
+}
 
 function WeaponStats(props) {
     console.log(props)
@@ -175,54 +186,67 @@ function WeaponStats(props) {
     Object.values(props.weaponStats).forEach(weaponCategory=> {
         Object.keys(weaponCategory).forEach(weaponItem => {
             var weapon = {
-                name: weaponItem,
-                kills: weaponCategory[weaponItem].properties.kills,
-                deaths: weaponCategory[weaponItem].properties.deaths,
-                kdRatio: (Number(weaponCategory[weaponItem].properties.kdRatio)).toFixed(2),
-                headshots: weaponCategory[weaponItem].properties.headshots,
-                accuracy: Math.round(Number(weaponCategory[weaponItem].properties.accuracy * 100)) + '%'
+              name: weaponItem,
+              kills: weaponCategory[weaponItem].properties.kills,
+              deaths: weaponCategory[weaponItem].properties.deaths,
+              kdRatio: (Number(weaponCategory[weaponItem].properties.kdRatio)).toFixed(2),
+              headshots: weaponCategory[weaponItem].properties.headshots,
+              accuracy: Math.round(Number(weaponCategory[weaponItem].properties.accuracy * 100))
             }
             weaponStatsArray.push(weapon)
         })
     })
     const columns = React.useMemo(
-        () => [
-            {
-                Header: 'weapon',
-                accessor: 'name',
-                Cell: props => getWeaponName(props.cell.value)
-            },
-            {
-                Header: 'kills',
-                accessor: 'kills',
-                Cell: props => Number(props.cell.value).toLocaleString('en-US')
-            },
-            {
-                Header: 'deaths',
-                accessor: 'deaths',
-                Cell: props => Number(props.cell.value).toLocaleString('en-US') 
-            },
-            {
-                Header: 'kdratio',
-                accessor: 'kdRatio' 
-            },
-            {
-                Header: 'headshots',
-                accessor: 'headshots',
-                Cell: props => Number(props.cell.value).toLocaleString('en-US') 
-            },
-            {
-                Header: 'accuracy',
-                accessor: 'accuracy' 
-            }
-        ],
-        []
+      () => [
+        {
+          Header: 'weapon',
+          accessor: 'name',
+          Cell: props => getWeaponName(props.cell.value)
+        },
+        {
+          Header: 'kills',
+          accessor: 'kills',
+          Cell: props => Number(props.cell.value).toLocaleString('en-US')
+        },
+        {
+          Header: 'deaths',
+          accessor: 'deaths',
+          Cell: props => Number(props.cell.value).toLocaleString('en-US') 
+        },
+        {
+          Header: 'kd ratio',
+          accessor: 'kdRatio',
+          Cell: props => checkNaN(props.cell.value),
+        },
+        {
+          Header: 'headshots',
+          accessor: 'headshots',
+          Cell: props => checkNaN(Number(props.cell.value).toLocaleString('en-US')) 
+        },
+        {
+          Header: 'accuracy',
+          accessor: 'accuracy',
+          Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? (checkNaN(props.cell.value) + '%') : checkNaN(props.cell.value)
+        }
+      ],
+      []
     )
     
     return(
+      <div>
         <Styles>
-            <Table columns={columns} data={weaponStatsArray}/>
+          <Table 
+            columns={columns} 
+            data={weaponStatsArray}
+          />
         </Styles>
+        <Collapsible 
+          trigger="VIEW MORE" 
+          triggerWhenOpen="VIEW LESS"
+          // onOpen={}
+          >
+        </Collapsible>
+      </div>
     )
 }
 
