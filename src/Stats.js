@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import './Stats.css'
 import Collapsible from 'react-collapsible'
 import Axios from 'axios';
+import WeaponStats from './WeaponStats'
 
 class Stats extends Component {
     constructor(props) {
@@ -43,6 +44,7 @@ class Stats extends Component {
         } else if(this.state.stats && this.state.stats.status !== "error"){
             console.log(this.state)
             const lifetimeStats = this.state.stats.data.lifetime.all.properties
+            
             let rankStyles = {
                 height: '100px',
                 width: '100px',
@@ -203,7 +205,8 @@ class Stats extends Component {
                             </div>
                         </Collapsible>
                     </div>
-                    <div id="weaponStats">
+                    <div>
+                        <WeaponStats weaponStats={this.state.stats.data.lifetime.itemData}/>
                     </div>
                     <br></br>
                 </div>
