@@ -121,11 +121,8 @@ function Table({columns, data}) {
             {headerGroups.map(headerGroup => (
               <tr {...headerGroup.getHeaderGroupProps()}>
                 {headerGroup.headers.map(column => (
-                  // Add the sorting props to control sorting. For this example
-                  // we can add them into the header props
                   <th {...column.getHeaderProps(column.getSortByToggleProps())}>
                     {column.render('Header')}
-                    {/* Add a sort direction indicator */}
                     <span>
                       {column.isSorted
                         ? column.isSortedDesc
@@ -155,10 +152,22 @@ function Table({columns, data}) {
           </tbody>
         </table>
         <div className="pagination" id="buttonDiv">
-          <button id="moreWeaponStats"onClick={ () => setPageSize(pageSize === 10 ? 50 : 10)} value={pageSize}>VIEW MORE</button>
+          <button id="moreWeaponStats"onClick={ () => {setPageSize(pageSize === 10 ? 50 : 10); changeText()}} value="VIEW MORE">VIEW MORE</button>
         </div>
       </>
     )
+}
+
+function changeText() {
+  var elem = document.getElementById("moreWeaponStats");
+    console.log(elem.value)
+    if (elem.value.localeCompare("VIEW MORE")) {
+      elem.innerHTML = "VIEW MORE";
+      elem.value = "VIEW MORE"
+    }else {
+      elem.innerHTML = "VIEW LESS";
+      elem.value = "VIEW LESS"
+    }
 }
 
 function getWeaponName(weaponID) {
@@ -174,7 +183,6 @@ function checkNaN(number) {
 }
 
 function WeaponStats(props) {
-    console.log(props)
     let weaponStatsArray = []
     Object.values(props.weaponStats).forEach(weaponCategory=> {
         Object.keys(weaponCategory).forEach(weaponItem => {
@@ -192,34 +200,39 @@ function WeaponStats(props) {
     const columns = React.useMemo(
       () => [
         {
-          Header: 'weapon',
-          accessor: 'name',
-          Cell: props => getWeaponName(props.cell.value)
-        },
-        {
-          Header: 'kills',
-          accessor: 'kills',
-          Cell: props => Number(props.cell.value).toLocaleString('en-US')
-        },
-        {
-          Header: 'deaths',
-          accessor: 'deaths',
-          Cell: props => Number(props.cell.value).toLocaleString('en-US') 
-        },
-        {
-          Header: 'kd ratio',
-          accessor: 'kdRatio',
-          Cell: props => checkNaN(props.cell.value),
-        },
-        {
-          Header: 'headshots',
-          accessor: 'headshots',
-          Cell: props => checkNaN(Number(props.cell.value).toLocaleString('en-US')) 
-        },
-        {
-          Header: 'accuracy',
-          accessor: 'accuracy',
-          Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? (checkNaN(props.cell.value) + '%') : checkNaN(props.cell.value)
+          Header: 'WEAPON',
+          columns: [
+            {
+              Header: 'weapon',
+              accessor: 'name',
+              Cell: props => getWeaponName(props.cell.value)
+            },
+            {
+              Header: 'kills',
+              accessor: 'kills',
+              Cell: props => Number(props.cell.value).toLocaleString('en-US')
+            },
+            {
+              Header: 'deaths',
+              accessor: 'deaths',
+              Cell: props => Number(props.cell.value).toLocaleString('en-US') 
+            },
+            {
+              Header: 'kd ratio',
+              accessor: 'kdRatio',
+              Cell: props => checkNaN(props.cell.value),
+            },
+            {
+              Header: 'headshots',
+              accessor: 'headshots',
+              Cell: props => checkNaN(Number(props.cell.value).toLocaleString('en-US')) 
+            },
+            {
+              Header: 'accuracy',
+              accessor: 'accuracy',
+              Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? (checkNaN(props.cell.value) + '%') : checkNaN(props.cell.value)
+            }
+          ]
         }
       ],
       []

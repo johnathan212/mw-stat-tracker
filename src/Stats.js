@@ -3,6 +3,7 @@ import './Stats.css'
 import Collapsible from 'react-collapsible'
 import Axios from 'axios';
 import WeaponStats from './WeaponStats'
+import KillStreakStats from './KillStreakStats'
 
 class Stats extends Component {
     constructor(props) {
@@ -207,6 +208,9 @@ class Stats extends Component {
                     </div>
                     <div>
                         <WeaponStats weaponStats={this.state.stats.data.lifetime.itemData}/>
+                    </div>
+                    <div>
+                        <KillStreakStats killStreakStats={this.state.stats.data.lifetime.scorestreakData}/>
                     </div>
                     <br></br>
                 </div>

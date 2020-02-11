@@ -1,14 +1,11 @@
-#weaponStats {
+#killStreakStats {
     display: inline-block;
     border: 1px solid white;
     margin-top: 25px;
     background-color: #292929;
 }
 
-#buttonDiv {
-    height: 30px;
-}
-#moreWeaponStats {
+#moreKillStreakStats {
     font-size: 18px;
     font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
     font-style: normal;
@@ -17,8 +14,4 @@
     color: white;
     cursor: pointer;
     outline: none;
-}
-
-.left {
-    text-align: left;
 }
