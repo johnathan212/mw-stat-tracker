@@ -1,0 +1,18 @@
+#weaponStats {
+    display: inline-block;
+    border: 1px solid white;
+    margin-top: 15px;
+    background-color: #292929;
+}
+
+#buttonDiv {
+    height: 30px;
+}
+#moreWeaponStats {
+    font-size: 18px;
+    border: none;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}

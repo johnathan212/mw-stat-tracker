@@ -1,18 +1,14 @@
 import React from 'react'
-import { useTable, useSortBy } from 'react-table'
+import { useTable, useSortBy, usePagination } from 'react-table'
 import styled from 'styled-components'
 import {FaSortDown, FaSortUp} from 'react-icons/fa'
 import './WeaponStats.css'
-import Collapsible from 'react-collapsible'
 
 const Styles = styled.div`
-  padding: 1rem;
-  display: inline-flex;
+  display: inline-block;
 
   table {
-    margin-top: 10px;
     border-spacing: 0;
-    border: 1px solid white;
     background-color: #292929;
     font-size: 20px;
     min-width: 70vw;
@@ -21,14 +17,6 @@ const Styles = styled.div`
         font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
         
     }
-    tr {
-      :last-child {
-        td {
-          border-bottom: 0;
-        }
-      }
-    }
-
     th,
     td {
       margin: 0;
@@ -109,62 +97,67 @@ function Table({columns, data}) {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
         prepareRow,
+        page,
+        setPageSize,
+        state: {pageSize}
     } = useTable(
         {
             columns,
             data,
             initialState: {
-              sortBy: [{id: 'kills', desc: true}]
+              sortBy: [{id: 'kills', desc: true}],
+              pageSize: 10
             }
         },
-        useSortBy
+        useSortBy,
+        usePagination
     )
-    const showNumRows = rows.slice(0, 10)
 
     return(
-        <>
-      <table {...getTableProps()}>
-        <thead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                // Add the sorting props to control sorting. For this example
-                // we can add them into the header props
-                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
-                  {column.render('Header')}
-                  {/* Add a sort direction indicator */}
-                  <span>
-                    {column.isSorted
-                      ? column.isSortedDesc
-                        ? <FaSortDown/>
-                        : <FaSortUp/>
-                      : ''}
-                  </span>
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody {...getTableBodyProps()}>
-          {showNumRows.map(
-            (row, i) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map(cell => {
-                    return (
-                      <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-                    )
-                  })}
-                </tr>
-              )}
-          )}
-        </tbody>
-      </table>
-      <br />
-    </>
+      <>
+        <table {...getTableProps()}>
+          <thead>
+            {headerGroups.map(headerGroup => (
+              <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroup.headers.map(column => (
+                  // Add the sorting props to control sorting. For this example
+                  // we can add them into the header props
+                  <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                    {column.render('Header')}
+                    {/* Add a sort direction indicator */}
+                    <span>
+                      {column.isSorted
+                        ? column.isSortedDesc
+                          ? <FaSortDown/>
+                          : <FaSortUp/>
+                        : ''}
+                    </span>
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map(
+              (row, i) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map(cell => {
+                      return (
+                        <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                      )
+                    })}
+                  </tr>
+                )}
+            )}
+          </tbody>
+        </table>
+        <div className="pagination" id="buttonDiv">
+          <button id="moreWeaponStats"onClick={ () => setPageSize(pageSize === 10 ? 50 : 10)} value={pageSize}>VIEW MORE</button>
+        </div>
+      </>
     )
 }
 
@@ -233,19 +226,13 @@ function WeaponStats(props) {
     )
     
     return(
-      <div>
+      <div id="weaponStats">
         <Styles>
           <Table 
             columns={columns} 
             data={weaponStatsArray}
           />
         </Styles>
-        <Collapsible 
-          trigger="VIEW MORE" 
-          triggerWhenOpen="VIEW LESS"
-          // onOpen={}
-          >
-        </Collapsible>
       </div>
     )
 }
