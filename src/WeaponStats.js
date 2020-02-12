@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTable, useSortBy, usePagination } from 'react-table'
+import { useTable, useSortBy, usePagination, useFilters } from 'react-table'
 import styled from 'styled-components'
 import {FaSortDown, FaSortUp} from 'react-icons/fa'
 import './WeaponStats.css'
@@ -100,7 +100,7 @@ function Table({columns, data}) {
         prepareRow,
         page,
         setPageSize,
-        state: {pageSize}
+        state: {pageSize},
     } = useTable(
         {
             columns,
@@ -111,7 +111,8 @@ function Table({columns, data}) {
             }
         },
         useSortBy,
-        usePagination
+        usePagination,
+        useFilters
     )
 
     return(
@@ -158,6 +159,37 @@ function Table({columns, data}) {
     )
 }
 
+function SelectColumnFilter({
+  column: { filterValue, setFilter, preFilteredRows, id },
+}) {
+  // Calculate the options for filtering
+  // using the preFilteredRows
+  const options = React.useMemo(() => {
+    const options = new Set()
+    preFilteredRows.forEach(row => {
+      options.add(row.values[id])
+    })
+    return [...options.values()]
+  }, [id, preFilteredRows])
+
+  // Render a multi-select box
+  return (
+    <select
+      value={filterValue}
+      onChange={e => {
+        setFilter(e.target.value || undefined)
+      }}
+    >
+      <option value="">All</option>
+      {options.map((option, i) => (
+        <option key={i} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+  )
+}
+
 function changeText() {
   var elem = document.getElementById("moreWeaponStats");
     console.log(elem.value)
@@ -170,7 +202,7 @@ function changeText() {
     }
 }
 
-function getWeaponName(weaponID) {
+function getWeaponName(weaponID){
   return String(weaponNameDict[weaponID])
 }
 
@@ -184,7 +216,8 @@ function checkNaN(number) {
 
 function WeaponStats(props) {
     let weaponStatsArray = []
-    Object.values(props.weaponStats).forEach(weaponCategory=> {
+    Object.keys(props.weaponStats).forEach(weaponCategoryName=> {
+        let weaponCategory = props.weaponStats[weaponCategoryName]
         Object.keys(weaponCategory).forEach(weaponItem => {
             var weapon = {
               name: weaponItem,
@@ -192,11 +225,13 @@ function WeaponStats(props) {
               deaths: weaponCategory[weaponItem].properties.deaths,
               kdRatio: (Number(weaponCategory[weaponItem].properties.kdRatio)).toFixed(2),
               headshots: weaponCategory[weaponItem].properties.headshots,
-              accuracy: Math.round(Number(weaponCategory[weaponItem].properties.accuracy * 100))
+              accuracy: Math.round(Number(weaponCategory[weaponItem].properties.accuracy * 100)),
+              category: weaponCategoryName
             }
             weaponStatsArray.push(weapon)
         })
     })
+    console.log(weaponStatsArray[0])
     const columns = React.useMemo(
       () => [
         {
