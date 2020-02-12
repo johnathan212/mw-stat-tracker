@@ -92,7 +92,7 @@ function Table({columns, data}) {
           </tbody>
         </table>
         <div className="pagination" id="buttonDiv">
-          <button id="moreKillStreakStats"onClick={ () => {setPageSize(pageSize === 10 ? 50 : 10); changeText()}} value="VIEW MORE">VIEW MORE</button>
+          <button id="moreKillStreakStats"onClick={ () => {setPageSize(pageSize === 10 ? 50 : 10); changeText()}} value="VIEW MORE">VIEW MORE ▼</button>
         </div>
       </>
     )
@@ -102,10 +102,10 @@ function changeText() {
   var elem = document.getElementById("moreKillStreakStats");
     console.log(elem.value)
     if (elem.value.localeCompare("VIEW MORE")) {
-      elem.innerHTML = "VIEW MORE";
+      elem.innerHTML = "VIEW MORE ▼";
       elem.value = "VIEW MORE"
     }else {
-      elem.innerHTML = "VIEW LESS";
+      elem.innerHTML = "VIEW LESS ▲";
       elem.value = "VIEW LESS"
     }
 }

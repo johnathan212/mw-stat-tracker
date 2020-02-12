@@ -40,6 +40,7 @@ class SearchBar extends Component {
         <FaSearch id="searchIcon"/>
       </button>
     ))
+
     return (
       <div id="page">
         <div id="searchBox"> 
@@ -65,7 +66,8 @@ class SearchBar extends Component {
           </div>
           <div id="form">
             <form>
-              <input type="text"
+              <input 
+                type="text"
                 onChange={ (e) => this.handleChange(e) }
               />
               <SearchButton/>
