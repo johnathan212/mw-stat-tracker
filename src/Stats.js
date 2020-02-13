@@ -53,10 +53,8 @@ class Stats extends Component {
 			}
 
 			return (
-				// <h1> {props.stats.data.username}{console.log(props.stats)}</h1>
 				<div id="playerStats">
 					<h1> {this.state.stats.data.username} </h1>
-					{/* <h1> {username} </h1> */}
 					<div id="level">
 						<div id="levelText">LEVEL {this.state.stats.data.level} </div>
 						<div id="rankImage" style={rankStyles}></div>
@@ -92,7 +90,7 @@ class Stats extends Component {
 								<p> {(Math.round(lifetimeStats.accuracy * 100))}%</p>
 							</div>
 						</div>
-						<Collapsible trigger="VIEW MORE" triggerWhenOpen="VIEW LESS">
+						<Collapsible trigger="VIEW MORE ▼" triggerWhenOpen="VIEW LESS ▲">
 							<div id="moreStats">
 								<div className="moreStatsColumn">
 									<div className="moreStatsElement">

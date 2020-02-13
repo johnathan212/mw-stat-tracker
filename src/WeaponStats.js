@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTable, useSortBy, usePagination } from 'react-table'
 import styled from 'styled-components'
 import {FaSortDown, FaSortUp} from 'react-icons/fa'
@@ -12,6 +12,7 @@ const Styles = styled.div`
     background-color: #292929;
     font-size: 20px;
     min-width: 70vw;
+    border-top: 1px solid white;
 
     thead {
         font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
@@ -182,51 +183,22 @@ function checkNaN(number) {
   }
 }
 
-function useColumns() {
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'WEAPON',
-        columns: [
-          {
-            Header: 'weapon',
-            accessor: 'name',
-            Cell: props => getWeaponName(props.cell.value)
-          },
-          {
-            Header: 'kills',
-            accessor: 'kills',
-            Cell: props => Number(props.cell.value).toLocaleString('en-US')
-          },
-          {
-            Header: 'deaths',
-            accessor: 'deaths',
-            Cell: props => Number(props.cell.value).toLocaleString('en-US') 
-          },
-          {
-            Header: 'kd ratio',
-            accessor: 'kdRatio',
-            Cell: props => checkNaN(props.cell.value),
-          },
-          {
-            Header: 'headshots',
-            accessor: 'headshots',
-            Cell: props => checkNaN(Number(props.cell.value).toLocaleString('en-US')) 
-          },
-          {
-            Header: 'accuracy',
-            accessor: 'accuracy',
-            Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? (checkNaN(props.cell.value) + '%') : checkNaN(props.cell.value)
-          }
-        ],
-      },
-    ],
-    []
-  )
-  return columns
+function getFilter(weaponStatsArray, filter) {
+  let filteredWeaponStatsArray = []
+  if(filter === "all") {
+    return weaponStatsArray.slice()
+  } else {
+    weaponStatsArray.forEach(function(element) {
+      if(element.category === `${filter}`) {
+        filteredWeaponStatsArray.push(element)
+      }
+    })
+  }
+  return filteredWeaponStatsArray
 }
 
 function WeaponStats(props) {
+  const [filter, setFilter] = useState("all")
   let weaponStatsArray = []
   Object.keys(props.weaponStats).forEach(weaponCategoryName=> {
       let weaponCategory = props.weaponStats[weaponCategoryName]
@@ -243,14 +215,72 @@ function WeaponStats(props) {
           weaponStatsArray.push(weapon)
       })
   })
-  const columns = useColumns()
+
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'weapon',
+        accessor: 'name',
+        Cell: props => getWeaponName(props.cell.value)
+      },
+      {
+        Header: 'kills',
+        accessor: 'kills',
+        Cell: props => Number(props.cell.value).toLocaleString('en-US')
+      },
+      {
+        Header: 'deaths',
+        accessor: 'deaths',
+        Cell: props => Number(props.cell.value).toLocaleString('en-US') 
+      },
+      {
+        Header: 'kd ratio',
+        accessor: 'kdRatio',
+        Cell: props => checkNaN(props.cell.value),
+      },
+      {
+        Header: 'headshots',
+        accessor: 'headshots',
+        Cell: props => checkNaN(Number(props.cell.value).toLocaleString('en-US')) 
+      },
+      {
+        Header: 'accuracy',
+        accessor: 'accuracy',
+        Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? (checkNaN(props.cell.value) + '%') : checkNaN(props.cell.value)
+      }
+    ],
+    []
+  )
+  let filteredWeaponStatsArray = getFilter(weaponStatsArray, filter)
   
   return(
     <div id="weaponStats">
+      <div id="weaponHeader">
+        <div id="filterdiv">
+          <select
+            id="selectFilter"
+            onChange={() => setFilter(document.getElementById("selectFilter").value)}
+          >
+            <option value="all">All</option>
+            <option value="weapon_sniper">Sniper</option>
+            <option value="weapon_lmg">LMG</option>
+            <option value="weapon_launcher">Launcher</option>
+            <option value="weapon_pistol">Pistol</option>
+            <option value="weapon_assault_rifle">Assault Rifle</option>
+            <option value="weapon_other">Other</option>
+            <option value="weapon_shotgun">Shotgun</option>
+            <option value="weapon_smg">SMG</option>
+            <option value="weapon_marksman">Marksman</option>
+            <option value="weapon_melee">Melee</option>
+          </select>
+        </div>
+        <div id="header">Weapons</div>
+        <div id="empty"></div>
+      </div>
       <Styles>
         <Table 
           columns={columns} 
-          data={weaponStatsArray}
+          data={filteredWeaponStatsArray}
         />
       </Styles>
     </div>

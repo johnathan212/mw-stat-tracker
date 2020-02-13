@@ -1,13 +1,11 @@
 #weaponStats {
-    display: inline-block;
+    display: inline-flex;
     border: 1px solid white;
     margin-top: 25px;
     background-color: #292929;
+    flex-direction: column;
 }
 
-#buttonDiv {
-    height: 30px;
-}
 #moreWeaponStats {
     font-size: 18px;
     font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
@@ -19,6 +17,34 @@
     outline: none;
 }
 
-.left {
-    text-align: left;
+#weaponHeader {
+    display: inline-flex;
+}
+
+#header {
+    text-align: center;
+    align-self: center;
+    min-width: 33%;
+}
+
+#filterdiv {
+    min-width: 33%;
+}
+
+#selectFilter {
+    font-size: 20px;
+    font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
+    color: white;
+    background-color: transparent;
+    outline: none;
+    vertical-align: middle;
+    margin-bottom: 3px;
+}
+
+option {
+    background-color: #292929;
+}
+
+#empty {
+    min-width: 34%;
 }

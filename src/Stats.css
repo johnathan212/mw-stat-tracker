@@ -87,10 +87,9 @@ p {
     color: #57ced4;
 }
 
-Stats>.Collapsible {
+div.Collapsible {
     font-size: 18px;
     text-align: center;
-    margin-top: -25px;
 }
 
 .Collapsible__trigger {
