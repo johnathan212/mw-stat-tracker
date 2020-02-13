@@ -1,5 +1,5 @@
 import React from 'react'
-import { useTable, useSortBy, usePagination, useFilters } from 'react-table'
+import { useTable, useSortBy, usePagination } from 'react-table'
 import styled from 'styled-components'
 import {FaSortDown, FaSortUp} from 'react-icons/fa'
 import './WeaponStats.css'
@@ -103,16 +103,15 @@ function Table({columns, data}) {
         state: {pageSize},
     } = useTable(
         {
-            columns,
-            data,
-            initialState: {
-              sortBy: [{id: 'kills', desc: true}],
-              pageSize: 10
-            }
+          columns,
+          data,
+          initialState: {
+            sortBy: [{id: 'kills', desc: true}],
+            pageSize: 10
+          }
         },
         useSortBy,
-        usePagination,
-        useFilters
+        usePagination
     )
 
     return(
@@ -159,37 +158,6 @@ function Table({columns, data}) {
     )
 }
 
-function SelectColumnFilter({
-  column: { filterValue, setFilter, preFilteredRows, id },
-}) {
-  // Calculate the options for filtering
-  // using the preFilteredRows
-  const options = React.useMemo(() => {
-    const options = new Set()
-    preFilteredRows.forEach(row => {
-      options.add(row.values[id])
-    })
-    return [...options.values()]
-  }, [id, preFilteredRows])
-
-  // Render a multi-select box
-  return (
-    <select
-      value={filterValue}
-      onChange={e => {
-        setFilter(e.target.value || undefined)
-      }}
-    >
-      <option value="">All</option>
-      {options.map((option, i) => (
-        <option key={i} value={option}>
-          {option}
-        </option>
-      ))}
-    </select>
-  )
-}
-
 function changeText() {
   var elem = document.getElementById("moreWeaponStats");
     console.log(elem.value)
@@ -214,75 +182,79 @@ function checkNaN(number) {
   }
 }
 
+function useColumns() {
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'WEAPON',
+        columns: [
+          {
+            Header: 'weapon',
+            accessor: 'name',
+            Cell: props => getWeaponName(props.cell.value)
+          },
+          {
+            Header: 'kills',
+            accessor: 'kills',
+            Cell: props => Number(props.cell.value).toLocaleString('en-US')
+          },
+          {
+            Header: 'deaths',
+            accessor: 'deaths',
+            Cell: props => Number(props.cell.value).toLocaleString('en-US') 
+          },
+          {
+            Header: 'kd ratio',
+            accessor: 'kdRatio',
+            Cell: props => checkNaN(props.cell.value),
+          },
+          {
+            Header: 'headshots',
+            accessor: 'headshots',
+            Cell: props => checkNaN(Number(props.cell.value).toLocaleString('en-US')) 
+          },
+          {
+            Header: 'accuracy',
+            accessor: 'accuracy',
+            Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? (checkNaN(props.cell.value) + '%') : checkNaN(props.cell.value)
+          }
+        ],
+      },
+    ],
+    []
+  )
+  return columns
+}
+
 function WeaponStats(props) {
-    let weaponStatsArray = []
-    Object.keys(props.weaponStats).forEach(weaponCategoryName=> {
-        let weaponCategory = props.weaponStats[weaponCategoryName]
-        Object.keys(weaponCategory).forEach(weaponItem => {
-            var weapon = {
-              name: weaponItem,
-              kills: weaponCategory[weaponItem].properties.kills,
-              deaths: weaponCategory[weaponItem].properties.deaths,
-              kdRatio: (Number(weaponCategory[weaponItem].properties.kdRatio)).toFixed(2),
-              headshots: weaponCategory[weaponItem].properties.headshots,
-              accuracy: Math.round(Number(weaponCategory[weaponItem].properties.accuracy * 100)),
-              category: weaponCategoryName
-            }
-            weaponStatsArray.push(weapon)
-        })
-    })
-    console.log(weaponStatsArray[0])
-    const columns = React.useMemo(
-      () => [
-        {
-          Header: 'WEAPON',
-          columns: [
-            {
-              Header: 'weapon',
-              accessor: 'name',
-              Cell: props => getWeaponName(props.cell.value)
-            },
-            {
-              Header: 'kills',
-              accessor: 'kills',
-              Cell: props => Number(props.cell.value).toLocaleString('en-US')
-            },
-            {
-              Header: 'deaths',
-              accessor: 'deaths',
-              Cell: props => Number(props.cell.value).toLocaleString('en-US') 
-            },
-            {
-              Header: 'kd ratio',
-              accessor: 'kdRatio',
-              Cell: props => checkNaN(props.cell.value),
-            },
-            {
-              Header: 'headshots',
-              accessor: 'headshots',
-              Cell: props => checkNaN(Number(props.cell.value).toLocaleString('en-US')) 
-            },
-            {
-              Header: 'accuracy',
-              accessor: 'accuracy',
-              Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? (checkNaN(props.cell.value) + '%') : checkNaN(props.cell.value)
-            }
-          ]
-        }
-      ],
-      []
-    )
-    
-    return(
-      <div id="weaponStats">
-        <Styles>
-          <Table 
-            columns={columns} 
-            data={weaponStatsArray}
-          />
-        </Styles>
-      </div>
-    )
+  let weaponStatsArray = []
+  Object.keys(props.weaponStats).forEach(weaponCategoryName=> {
+      let weaponCategory = props.weaponStats[weaponCategoryName]
+      Object.keys(weaponCategory).forEach(weaponItem => {
+          var weapon = {
+            name: weaponItem,
+            kills: weaponCategory[weaponItem].properties.kills,
+            deaths: weaponCategory[weaponItem].properties.deaths,
+            kdRatio: (Number(weaponCategory[weaponItem].properties.kdRatio)).toFixed(2),
+            headshots: weaponCategory[weaponItem].properties.headshots,
+            accuracy: Math.round(Number(weaponCategory[weaponItem].properties.accuracy * 100)),
+            category: weaponCategoryName
+          }
+          weaponStatsArray.push(weapon)
+      })
+  })
+  const columns = useColumns()
+  
+  return(
+    <div id="weaponStats">
+      <Styles>
+        <Table 
+          columns={columns} 
+          data={weaponStatsArray}
+        />
+      </Styles>
+    </div>
+  )
 }
 
 export default WeaponStats
