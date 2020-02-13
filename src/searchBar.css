@@ -51,18 +51,19 @@ form {
 }
 
 #searchButton {
-    display: inline-flex;
+    display: inline-block;
     font-size: 22px;
     border: none;
     color: white;
     border-radius: 0 25px 25px 0;
     background-color: transparent;
     outline: none;
-    padding-right: 20px;
+    padding-right: 22px;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 #searchButton:active {
-    Color: rgba(0, 0, 255, 0.767);
+    Color:gray;
 }
 

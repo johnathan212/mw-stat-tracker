@@ -176,7 +176,7 @@ function getWeaponName(weaponID){
 }
 
 function checkNaN(number) {
-  if(isNaN(number)) {
+  if(isNaN(number) || (typeof number) === undefined) {
     return <div style={{color: 'gray'}}>N/A</div>
   } else {
     return number
@@ -208,11 +208,13 @@ function WeaponStats(props) {
             kills: weaponCategory[weaponItem].properties.kills,
             deaths: weaponCategory[weaponItem].properties.deaths,
             kdRatio: (Number(weaponCategory[weaponItem].properties.kdRatio)).toFixed(2),
-            headshots: weaponCategory[weaponItem].properties.headshots,
+            headshots: weaponCategory[weaponItem].properties.headshots === undefined ? NaN : weaponCategory[weaponItem].properties.headshots,
             accuracy: Math.round(Number(weaponCategory[weaponItem].properties.accuracy * 100)),
             category: weaponCategoryName
           }
-          weaponStatsArray.push(weapon)
+          if(weapon.name in weaponNameDict) {
+            weaponStatsArray.push(weapon)
+          }
       })
   })
 
@@ -241,7 +243,7 @@ function WeaponStats(props) {
       {
         Header: 'headshots',
         accessor: 'headshots',
-        Cell: props => checkNaN(Number(props.cell.value).toLocaleString('en-US')) 
+        Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? checkNaN(props.cell.value).toLocaleString('en-US') : checkNaN(props.cell.value)
       },
       {
         Header: 'accuracy',
