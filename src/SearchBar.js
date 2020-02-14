@@ -4,6 +4,7 @@ import {FaSearch} from 'react-icons/fa'
 import {FaBattleNet} from 'react-icons/fa'
 import {FaXbox} from 'react-icons/fa'
 import {FaPlaystation} from 'react-icons/fa'
+import {withRouter} from 'react-router-dom'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class SearchBar extends Component {
       </button>
 
     return (
-      <div id="page">
+      <div>
         <div id="searchBox"> 
           <div id="platformSelect">
             <button
@@ -85,4 +86,4 @@ class SearchBar extends Component {
   }
 }
 
-export default SearchBar
+export default withRouter(SearchBar)

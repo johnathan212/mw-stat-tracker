@@ -4,6 +4,7 @@ div {
 
 #searchBox {
     display: inline-flex;
+    flex-direction: row;
     margin: auto;
     border: solid;
     border-color: white;

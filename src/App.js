@@ -1,23 +1,26 @@
 import React, { Component } from 'react';
-import SearchBar from './SearchBar';
+import Home from './Home'
 import Stats from './Stats';
 import './App.css';
-import {Route, Switch, withRouter} from 'react-router-dom';
+import Footer from './Footer'
+import {Route, Switch} from 'react-router-dom';
 
 class App extends Component {
 
   render() {
     // let searchBar = withRouter( history => (<SearchBar history={history}/>));
-    const SearchBarWithRouter = withRouter(SearchBar)
+    // const SearchBarWithRouter = withRouter(SearchBar)
     
     return (
-        <div className="page">
-          <SearchBarWithRouter/>
-          <Switch>
-            <Route exact path='/' />
-            <Route path="/:platform/user/:username" component={Stats}/>
-          </Switch>
+      <div className="page">
+        <Switch>
+          <Route exact path='/' component={Home}/>
+          <Route path="/:platform/user/:username" component={Stats}/>
+        </Switch>
+        <div id="footer">
+          <Footer/>
         </div>
+      </div>
     )
   }
 }

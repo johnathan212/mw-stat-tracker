@@ -1,3 +1,17 @@
+#searchBar {
+    display: inline-flex;
+    flex: 1;
+
+}
+
+#searchBarHomeLink {
+    display: inline;
+}
+
+#emptyDiv {
+    display: inline;
+}
+
 #playerStats {
     display: inline-flex;
     flex-direction: column;
