@@ -1,18 +1,43 @@
 #homePage {
     display: inline-flex;
-    min-height: 100vh;
-    justify-content: center;
+    height: 100vh;
+    justify-content: space-around;
     flex-direction: column;
     max-width: 100%;
 }
 
 #siteName {
     font-family: "ModernWarfare-8MM6z";
+    font-size: 80px;
+    vertical-align: baseline;
+    cursor: default;
+}
+
+#empty {
+    font-family: "ModernWarfare-8MM6z";
     font-size: 100px;
     vertical-align: baseline;
+    visibility: hidden;
+    height: 30%;
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
 }
 
 @font-face {
     font-family: "ModernWarfare-8MM6z";
     src: local("ModernWarfare-8MM6z"), url(./Fonts/ModernWarfare-8MM6z.ttf)
 }
+
+.background { 
+    background-repeat: no-repeat; 
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}  

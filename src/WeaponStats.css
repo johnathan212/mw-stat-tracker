@@ -25,6 +25,8 @@
     text-align: center;
     align-self: center;
     min-width: 33%;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 #filterdiv {

@@ -2,6 +2,7 @@ import React from 'react'
 import SearchBar from './SearchBar'
 import './Home.css'
 import background from './Images/MWbackground.png'
+import Footer from './Footer'
 
 function Home() {
     let style = {
@@ -13,11 +14,21 @@ function Home() {
         backgroundSize: 'cover'
     }
     return(
-        <div id="homePage" style={style}>
+        <div id="homePage" className="background" style={style}>
+            <div style={{height: '30%'}}></div>
             <div id="siteName">
                 MW STATS
             </div>
-            <SearchBar/>
+            <div style={{display: 'flex', flex: '1'}}>
+                <SearchBar/>
+            </div>
+            <div id="empty">
+                MW STATS
+            </div>
+            <div style={{height: '10%'}}></div>
+            <div id="footer">
+                <Footer/>
+            </div>
         </div>
     )
 }

@@ -276,7 +276,7 @@ function WeaponStats(props) {
             <option value="weapon_melee">Melee</option>
           </select>
         </div>
-        <div id="header">Weapons</div>
+        <div id="header">WEAPONS</div>
         <div id="empty"></div>
       </div>
       <Styles>

@@ -50,37 +50,35 @@ class SearchBar extends Component {
       </button>
 
     return (
-      <div>
-        <div id="searchBox"> 
-          <div id="platformSelect">
-            <button
-              onClick={ (e) => this.handleDropdownChange(e, 'battle')}
-              style={(this.state.platform === 'battle') ? this.activeStyle : this.inactiveStyle}
-            >
-              <FaBattleNet/>
-            </button>
-            <button 
-              onClick={ (e) => this.handleDropdownChange(e, 'xbox')}
-              style={(this.state.platform === 'xbox') ? this.activeStyle : this.inactiveStyle}
-            >
-              <FaXbox/>
-            </button>
-            <button
-              onClick={ (e) => this.handleDropdownChange(e, 'psn')}
-              style={(this.state.platform === 'psn') ? this.activeStyle : this.inactiveStyle}
-            >
-              <FaPlaystation/>
-            </button>
-          </div>
-          <div id="form">
-            <input 
-              type="text"
-              onChange={ (e) => this.handleChange(e) }
-              onKeyPress={(event) => this.handleEnter(event)}
-            />
-            {SearchButton}
-          </div>
+      <div id="searchBox"> 
+        <div id="platformSelect">
+          <button
+            onClick={ (e) => this.handleDropdownChange(e, 'battle')}
+            style={(this.state.platform === 'battle') ? this.activeStyle : this.inactiveStyle}
+          >
+            <FaBattleNet/>
+          </button>
+          <button 
+            onClick={ (e) => this.handleDropdownChange(e, 'xbox')}
+            style={(this.state.platform === 'xbox') ? this.activeStyle : this.inactiveStyle}
+          >
+            <FaXbox/>
+          </button>
+          <button
+            onClick={ (e) => this.handleDropdownChange(e, 'psn')}
+            style={(this.state.platform === 'psn') ? this.activeStyle : this.inactiveStyle}
+          >
+            <FaPlaystation/>
+          </button>
         </div>
+        <div id="form">
+          <input 
+            type="text"
+            onChange={ (e) => this.handleChange(e) }
+            onKeyPress={(event) => this.handleEnter(event)}
+          />
+        </div>
+        {SearchButton}
       </div>
     );
   }

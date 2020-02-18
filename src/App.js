@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Home from './Home'
 import Stats from './Stats';
 import './App.css';
-import Footer from './Footer'
 import {Route, Switch} from 'react-router-dom';
 
 class App extends Component {
@@ -17,9 +16,6 @@ class App extends Component {
           <Route exact path='/' component={Home}/>
           <Route path="/:platform/user/:username" component={Stats}/>
         </Switch>
-        <div id="footer">
-          <Footer/>
-        </div>
       </div>
     )
   }

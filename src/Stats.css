@@ -11,7 +11,6 @@
     text-align: center;
     margin: auto;
     padding-top: 4px;
-    border: 1px solid white;
     padding-left: 2px;
     padding-right: 2px;
 }
@@ -22,8 +21,7 @@
 }
 
 #searchBar {
-    display: inline;
-    position: absoulte;
+    margin-top: 5px;
 }
 
 #emptyDiv {
@@ -46,7 +44,6 @@
     font-style: normal;
     font-size: 30px;
     background-color: #121212;
-    text-transform: capitalize;
     border-color: white;
     min-height: 75vh;
 }

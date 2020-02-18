@@ -6,6 +6,7 @@ import WeaponStats from './WeaponStats'
 import KillStreakStats from './KillStreakStats'
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
+import {AiOutlineLoading3Quarters} from 'react-icons/ai'
 
 class Stats extends Component {
 	constructor(props) {
@@ -42,7 +43,22 @@ class Stats extends Component {
 
 	render() {
 		if (this.state.loading === true) {
-			return (<div>Loading</div>)
+			return (
+			<div
+				style={{
+					display: 'flex',
+					height: '100vh',
+					width: '100%',
+					justifyContent: 'center', 
+					alignItems: 'center'
+				}}
+			>
+				<div style={{display: 'flex', flexDirection: 'row', margin: 'auto', fontSize: '30px', justifyContent: 'space-between'}}>
+					LOADING 
+					<AiOutlineLoading3Quarters/>
+					</div>
+			</div>
+			)
 		} else if (this.state.stats && this.state.stats.status !== "error") {
 			const lifetimeStats = this.state.stats.data.lifetime.all.properties
 
