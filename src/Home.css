@@ -1,4 +1,18 @@
 #homePage {
     display: inline-flex;
+    min-height: 100vh;
     justify-content: center;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+#siteName {
+    font-family: "ModernWarfare-8MM6z";
+    font-size: 100px;
+    vertical-align: baseline;
+}
+
+@font-face {
+    font-family: "ModernWarfare-8MM6z";
+    src: local("ModernWarfare-8MM6z"), url(./Fonts/ModernWarfare-8MM6z.ttf)
 }

@@ -56,12 +56,15 @@ class Stats extends Component {
 
 			return (
 				<div>
-					<div id="searchBar">
+					<div id="searchBarBox">
 						<div id="searchBarHomeLink">
-							<Link to="/">MW-STATS</Link>
+							<Link id="homeLink"to="/">MW-STATS</Link>
 						</div>
-						<SearchBar/>
+						<div id="searchBar">
+							<SearchBar/>
+						</div>
 						<div id="emptyDiv">
+							<Link to="/">MW-STATS</Link>
 						</div>
 					</div>
 					<div id="playerStats">
