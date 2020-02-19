@@ -5,8 +5,9 @@ import Axios from 'axios';
 import WeaponStats from './WeaponStats'
 import KillStreakStats from './KillStreakStats'
 import SearchBar from './SearchBar';
-import { Link } from 'react-router-dom';
-import {AiOutlineLoading3Quarters} from 'react-icons/ai'
+import { Link, Redirect } from 'react-router-dom';
+import {ClipLoader} from 'react-spinners'
+import Footer from './Footer';
 
 class Stats extends Component {
 	constructor(props) {
@@ -53,9 +54,15 @@ class Stats extends Component {
 					alignItems: 'center'
 				}}
 			>
-				<div style={{display: 'flex', flexDirection: 'row', margin: 'auto', fontSize: '30px', justifyContent: 'space-between'}}>
+				<div style={{display: 'flex', flexDirection: 'row', margin: 'auto', fontSize: '30px'}}>
 					LOADING 
-					<AiOutlineLoading3Quarters/>
+					<div className="sweet-loading" style={{marginLeft: '10px'}}>
+        		<ClipLoader
+          		size={25}
+          		color={"#white"}
+          		loading={this.state.loading}
+        	/>
+      </div>
 					</div>
 			</div>
 			)
@@ -240,10 +247,15 @@ class Stats extends Component {
 						</div>
 						<br></br>
 					</div>
+					<Footer/>
 				</div>
 			);
 		} else {
-			return <div><h1> INVALID PLAYER NAME</h1></div>
+			return (
+				<Redirect to="/">
+					{alert("INVALID PLAYER NAME")}
+				</Redirect>
+			)
 		}
 	}
 }

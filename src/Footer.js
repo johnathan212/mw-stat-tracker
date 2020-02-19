@@ -8,7 +8,7 @@ function Footer() {
             display: 'inline-flex',
             flexDirection: 'column'
         }}>
-            <div style={{fontSize: '12px', width: '80vw'}}>
+            <div style={{fontSize: '12px', width: '80vw', alignSelf: 'center'}}>
                 © 2020 MW-Stats. MW-Stats isn’t endorsed by Activision and doesn’t reflect the views or opinions of Activision or anyone officially involved in producing or managing Call of Duty: Modern Warfare. Call of Duty: Modern Warfare and Activision are trademarks or registered trademarks of Activision, Inc. Call of Duty © Activision, Inc.
             </div>
             <div style={{marginTop: '5px', fontSize: '30px'}}>
