@@ -5,7 +5,7 @@ import Axios from 'axios';
 import WeaponStats from './WeaponStats'
 import KillStreakStats from './KillStreakStats'
 import SearchBar from './SearchBar';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {ClipLoader} from 'react-spinners'
 import Footer from './Footer';
 
@@ -252,9 +252,10 @@ class Stats extends Component {
 			);
 		} else {
 			return (
-				<Redirect to="/">
-					{alert("INVALID PLAYER NAME")}
-				</Redirect>
+				<div style={{display: 'flex', height: '100vh', flexDirection: 'column', justifyContent: 'center', fontSize: '30px'}}>
+					PLAYER NOT FOUND
+					<Link to='/'>RETURN</Link>
+				</div>
 			)
 		}
 	}

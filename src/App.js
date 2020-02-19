@@ -7,9 +7,6 @@ import {Route, Switch} from 'react-router-dom';
 class App extends Component {
 
   render() {
-    // let searchBar = withRouter( history => (<SearchBar history={history}/>));
-    // const SearchBarWithRouter = withRouter(SearchBar)
-    
     return (
       <div className="page">
         <Switch>
