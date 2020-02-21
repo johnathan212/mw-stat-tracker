@@ -253,6 +253,7 @@ class Stats extends Component {
 		} else {
 			return (
 				<div style={{display: 'flex', height: '100vh', flexDirection: 'column', justifyContent: 'center', fontSize: '30px'}}>
+					<SearchBar/>
 					PLAYER NOT FOUND
 					<Link to='/'>RETURN</Link>
 				</div>
