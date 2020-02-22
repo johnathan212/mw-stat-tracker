@@ -16,9 +16,9 @@ div {
 }
 
 #form {
-    border-radius: 0 0 25px 25px;
-    width: 50vw;
-    height: 44px;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
 }
 
 #platformSelect {
@@ -48,10 +48,6 @@ input {
     font-family: "Electrolize", Verdana, Arial, Helvetica, sans-serif;
 }
 
-form {
-    display: inline-flex;
-}
-
 #searchButton {
     display: inline-block;
     font-size: 22px;
@@ -68,5 +64,15 @@ form {
 
 #searchButton:active {
     Color:gray;
+}
+
+#searchBoxDiv {
+    display: inline-block;
+    flex-direction: column;
+    align-self: center;
+}
+
+#inputDiv {
+    width: fit-content;
 }
 

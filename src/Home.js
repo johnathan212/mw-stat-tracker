@@ -19,7 +19,7 @@ function Home() {
             <div id="siteName">
                 MW STATS
             </div>
-            <div style={{display: 'flex', flex: '1'}}>
+            <div style={{display: 'flex', flex: '1', justifyContent: 'center'}}>
                 <SearchBar/>
             </div>
             <div id="empty">

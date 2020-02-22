@@ -5,13 +5,14 @@ import {FaBattleNet} from 'react-icons/fa'
 import {FaXbox} from 'react-icons/fa'
 import {FaPlaystation} from 'react-icons/fa'
 import {withRouter} from 'react-router-dom'
-import CreatableSelect from 'react-select/creatable'
+import SearchDropdown from './SearchDropdown'
 
 class SearchBar extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      platform: 'battle'
+      platform: 'battle',
+      focused: false
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleDropdownChange = this.handleDropdownChange.bind(this)
@@ -53,6 +54,14 @@ class SearchBar extends Component {
   //   }
   // }
 
+  onFocus = () => {
+    this.setState({focused: true})
+  }
+
+  onBlur = () => {
+    this.setState({focused: false})
+  }
+
   render() {
     const SearchButton =
       <button
@@ -91,46 +100,40 @@ class SearchBar extends Component {
     }
 
     return (
-      <div id="searchBox"> 
-        <div id="platformSelect">
-          <button
-            onClick={ (e) => this.handleDropdownChange(e, 'battle')}
-            style={(this.state.platform === 'battle') ? this.activeStyle : this.inactiveStyle}
-          >
-            <FaBattleNet/>
-          </button>
-          <button 
-            onClick={ (e) => this.handleDropdownChange(e, 'xbox')}
-            style={(this.state.platform === 'xbox') ? this.activeStyle : this.inactiveStyle}
-          >
-            <FaXbox/>
-          </button>
-          <button
-            onClick={ (e) => this.handleDropdownChange(e, 'psn')}
-            style={(this.state.platform === 'psn') ? this.activeStyle : this.inactiveStyle}
-          >
-            <FaPlaystation/>
-          </button>
+      <div id="searchBoxDiv">
+        <div id="searchBox"> 
+          <div id="platformSelect">
+            <button
+              onClick={ (e) => this.handleDropdownChange(e, 'battle')}
+              style={(this.state.platform === 'battle') ? this.activeStyle : this.inactiveStyle}
+            >
+              <FaBattleNet/>
+            </button>
+            <button 
+              onClick={ (e) => this.handleDropdownChange(e, 'xbox')}
+              style={(this.state.platform === 'xbox') ? this.activeStyle : this.inactiveStyle}
+            >
+              <FaXbox/>
+            </button>
+            <button
+              onClick={ (e) => this.handleDropdownChange(e, 'psn')}
+              style={(this.state.platform === 'psn') ? this.activeStyle : this.inactiveStyle}
+            >
+              <FaPlaystation/>
+            </button>
+          </div>
+          <div id="form">
+            <input 
+              type="text"
+              onChange={ (e) => this.handleChange(e) }
+              onKeyPress={(event) => this.handleEnter(event)}
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
+            />
+            <SearchDropdown focused={this.state.focused}/>
+          </div>
+          {SearchButton}
         </div>
-        <div id="form">
-          {/* <input 
-            type="text"
-            onChange={ (e) => this.handleChange(e) }
-            onKeyPress={(event) => this.handleEnter(event)}
-          >
-          </input> */}
-          <CreatableSelect
-            styles={style}
-            value={this.state.selectedOption}
-            // onChange={(event) => this.handleChange(event)}
-            onChange={this.handleChange}
-            onInputChange={this.handleEnter}
-            onKeyPress={(event) => this.handleEnter(event)}
-            options={[{value: 'why', label: 'why'}]}
-          >
-          </CreatableSelect>
-        </div>
-        {SearchButton}
       </div>
     );
   }
