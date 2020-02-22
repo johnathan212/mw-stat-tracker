@@ -29,30 +29,20 @@ class SearchBar extends Component {
     this.setState({ platform: platform}, () => {console.log(this.state.platform)})
   }
 
-  // handleChange = event => {
-  //   this.setState({ username: event.target.value })
-  // }
-  handleChange = (newValue, actionMeta) => {
-    actionMeta.name = newValue.value
-    console.log(newValue, actionMeta)
-    console.log(typeof actionMeta.action)
-    if(actionMeta.action === "create-option") {
-      this.setState({username: actionMeta.name})
-
-    }
-    console.log(this.state)
+  handleChange = event => {
+    this.setState({ username: event.target.value })
   }
+  
 
   callSearch = () => {
-    console.log(this.state)
     this.props.history.push('/' + this.state.platform + '/user/' + encodeURIComponent(this.state.username))
   }
 
-  // handleEnter = (event) => {
-  //   if(event.nativeEvent.key === "Enter") {
-  //     this.callSearch()
-  //   }
-  // }
+  handleEnter = (event) => {
+    if(event.nativeEvent.key === "Enter") {
+      this.callSearch()
+    }
+  }
 
   onFocus = () => {
     this.setState({focused: true})
@@ -71,33 +61,6 @@ class SearchBar extends Component {
       >
         <FaSearch id="searchIcon"/>
       </button>
-
-    const style = {
-      control: base => ({
-        ...base,
-        border: 0,
-        boxShadow: 'none',
-        backgroundColor: 'transparent',
-      }),
-      menu: (provided, state) => ({
-        // ...provided,
-        border: 'none',
-        backgroundColor: '#292929',
-        marginTop: '-1px'
-      }),
-      valueContainer: (provided) => ({
-        ...provided,
-      }),
-      input: () => ({
-        color: 'white'
-      }),
-      dropdownIndicator: () => ({
-        backgroundColor: 'transparent'
-      }),
-      container: () => ({
-        paddingRight: '20px'
-      })
-    }
 
     return (
       <div id="searchBoxDiv">

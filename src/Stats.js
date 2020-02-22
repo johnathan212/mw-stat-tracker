@@ -5,9 +5,10 @@ import Axios from 'axios';
 import WeaponStats from './WeaponStats'
 import KillStreakStats from './KillStreakStats'
 import SearchBar from './SearchBar';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import {ClipLoader} from 'react-spinners'
 import Footer from './Footer';
+import Cookies from 'js-cookie'
 
 class Stats extends Component {
 	constructor(props) {
@@ -68,6 +69,20 @@ class Stats extends Component {
 			)
 		} else if (this.state.stats && this.state.stats.status !== "error") {
 			const lifetimeStats = this.state.stats.data.lifetime.all.properties
+			
+			let currentCookie = Cookies.get("history")
+			let cookieArray
+			let newCookie = this.props.history.location.pathname
+			if(currentCookie === undefined) {
+				Cookies.set("history", newCookie)
+			} else {
+				cookieArray = currentCookie.split(",")
+				if(!cookieArray.includes(newCookie)) {
+					newCookie = currentCookie + ',' + newCookie
+					Cookies.set("history", newCookie)
+				}
+			}
+
 
 			let rankStyles = {
 				height: '100px',
