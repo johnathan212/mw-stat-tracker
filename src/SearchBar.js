@@ -48,8 +48,11 @@ class SearchBar extends Component {
     this.setState({focused: true})
   }
 
-  onBlur = () => {
-    this.setState({focused: false})
+  //check if next event target is in dropdown (same parent container) if true dont lose focus
+  onBlur = (event) => {
+    if(!event.currentTarget.parentNode.contains(event.relatedTarget)) {
+      this.setState({focused: false})
+    }
   }
 
   render() {
@@ -91,7 +94,7 @@ class SearchBar extends Component {
               onChange={ (e) => this.handleChange(e) }
               onKeyPress={(event) => this.handleEnter(event)}
               onFocus={this.onFocus}
-              onBlur={this.onBlur}
+              onBlur={(event) => this.onBlur(event)}
             />
             <SearchDropdown focused={this.state.focused}/>
           </div>

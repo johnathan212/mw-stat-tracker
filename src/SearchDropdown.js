@@ -11,8 +11,8 @@ function getUsername(url) {
 }
 
 function SearchDropdown(props) {
-  // if(props.focused) {
-    if(true) {
+  if(props.focused) {
+    // if(true) {
     let historyArray = Cookies.get("history").split(",")
     return (
       <div style={{
