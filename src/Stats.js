@@ -22,6 +22,7 @@ class Stats extends Component {
 	componentDidMount() {
 		this.search(this.state.username, this.state.platform)
 	}
+
 	componentDidUpdate(prevProps) {
 		if (prevProps.location.pathname !== this.props.location.pathname) {
 			this.setState({
@@ -30,6 +31,14 @@ class Stats extends Component {
 			})
 			this.search(this.props.match.params.username, this.props.match.params.platform)
 		}
+	}
+
+	getUsername(url) {
+		let username
+		for(let i = url.length - 1; url.charAt(i) !== '/'; i--) {
+			username = url.substring(i, url.length)
+		}
+		return username
 	}
 
 	async search(username, platform) {
@@ -44,7 +53,7 @@ class Stats extends Component {
 	}
 
 	render() {
-		if (this.state.loading === true) {
+		if(this.state.loading === true) {
 			return (
 			<div
 				style={{
@@ -67,9 +76,8 @@ class Stats extends Component {
 					</div>
 			</div>
 			)
-		} else if (this.state.stats && this.state.stats.status !== "error") {
+		} else if(this.state.stats && this.state.stats.status !== "error") {
 			const lifetimeStats = this.state.stats.data.lifetime.all.properties
-			console.log(this.state)
 			
 			let currentCookie = Cookies.get("history")
 			let cookieArray
@@ -79,8 +87,10 @@ class Stats extends Component {
 			} else {
 				cookieArray = currentCookie.split(",")
 				if(!cookieArray.includes(newCookie)) {
-					newCookie = currentCookie + ',' + newCookie
-					Cookies.set("history", newCookie)
+					if(this.state.username === this.getUsername(newCookie)) {
+						newCookie = currentCookie + ',' + newCookie
+						Cookies.set("history", newCookie)
+					}
 				}
 			}
 

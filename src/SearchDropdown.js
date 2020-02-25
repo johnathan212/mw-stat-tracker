@@ -19,12 +19,18 @@ class SearchDropdown extends Component {
     for(let i = 0; i < this.state.historyArray.length; i++) {
       if(this.state.historyArray[i] === itemToDelete) {
         let temp = this.state.historyArray
-        temp.splice(i, 1)
-        if(temp.length === 0) {
-          Cookies.remove("history")
-        } else {
-          Cookies.set("history", temp) 
-        }
+
+          temp.splice(i, 1)
+          let newCookie
+          for(let i = 0; i < temp.length; i++) {
+            if(i === 0 && temp[0] !== undefined) {
+              newCookie = temp[0]
+            } else {
+              newCookie = newCookie + ',' + temp[i]
+            }
+          }
+          Cookies.set("history", newCookie) 
+        
         this.setState({historyArray: temp})
       }
     }

@@ -76,8 +76,8 @@ class SearchBar extends Component {
               <FaBattleNet/>
             </button>
             <button 
-              onClick={ (e) => this.handleDropdownChange(e, 'xbox')}
-              style={(this.state.platform === 'xbox') ? this.activeStyle : this.inactiveStyle}
+              onClick={ (e) => this.handleDropdownChange(e, 'xbl')}
+              style={(this.state.platform === 'xbl') ? this.activeStyle : this.inactiveStyle}
             >
               <FaXbox/>
             </button>
