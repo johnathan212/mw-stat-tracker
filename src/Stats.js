@@ -69,6 +69,7 @@ class Stats extends Component {
 			)
 		} else if (this.state.stats && this.state.stats.status !== "error") {
 			const lifetimeStats = this.state.stats.data.lifetime.all.properties
+			console.log(this.state)
 			
 			let currentCookie = Cookies.get("history")
 			let cookieArray

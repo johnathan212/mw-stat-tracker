@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import Cookies from 'js-cookie'
 import {Link} from 'react-router-dom'
 
@@ -10,30 +10,82 @@ function getUsername(url) {
   return username
 }
 
-function SearchDropdown(props) {
-  if(props.focused) {
-    // if(true) {
-    let historyArray = Cookies.get("history").split(",")
-    return (
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        position:'absolute', 
-        width: 'inherit', 
-        textAlign: 'left', 
-        backgroundColor: '#292929',
-        marginTop: '-1px',
-        fontSize: '20px',
-        paddingLeft: '4px',
-        paddingBottom: '4px'
-      }}>
-        {historyArray.map(item => <Link key={`${item}`} to={`${item}`} style={{color: 'white'}}>{getUsername(item)}</Link>)}
-      </div>
-    )
-  } else {
-    return (
-      <div></div>
-    )
+class SearchDropdown extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {historyArray: undefined}
+  }
+  deleteHistory = (itemToDelete) => {
+    for(let i = 0; i < this.state.historyArray.length; i++) {
+      if(this.state.historyArray[i] === itemToDelete) {
+        let temp = this.state.historyArray
+        temp.splice(i, 1)
+        if(temp.length === 0) {
+          Cookies.remove("history")
+        } else {
+          Cookies.set("history", temp) 
+        }
+        this.setState({historyArray: temp})
+      }
+    }
+  }
+  componentDidMount() {
+    if(Cookies.get("history") !== undefined) {
+      this.setState({historyArray: Cookies.get("history").split(",")})
+    }
+  }
+
+  render() {
+    if(this.props.focused) {
+      if(this.state.historyArray !== undefined) {
+        return (
+          <div style={{
+            display: 'flex',
+            flexDirection: 'column',
+            position:'absolute', 
+            width: 'inherit', 
+            textAlign: 'left', 
+            backgroundColor: '#292929',
+            marginTop: '-1px',
+            fontSize: '20px',
+            paddingLeft: '4px',
+            paddingBottom: '4px'
+          }}>
+            <h1 style={{fontSize: '20px', textAlign: 'center'}}>Recent Searches</h1>
+            {this.state.historyArray.map(item =>
+              <div key={`${item}`}>
+                <Link to={`${item}`} style={{color: 'white'}}>
+                  {getUsername(item)}
+                </Link>
+                <button onClick={() => this.deleteHistory(`${item}`)}>x</button>    
+              </div> 
+            )}
+          </div>
+        )
+      } else {
+        return (<div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            position:'absolute', 
+            width: 'inherit', 
+            textAlign: 'left', 
+            backgroundColor: '#292929',
+            marginTop: '-1px',
+            fontSize: '20px',
+            paddingLeft: '4px',
+            paddingBottom: '4px'
+          }}
+        >
+          <h1 style={{fontSize: '20px', textAlign: 'center', borderBottom: '1px solid white'}}>Recent Searches</h1>
+          <p style={{textAlign: 'center', fontSize: '18px'}}>No recent searches</p>
+        </div>)
+      }
+    } else {
+      return (
+        <div></div>
+      )
+    }
   }
 }
 
