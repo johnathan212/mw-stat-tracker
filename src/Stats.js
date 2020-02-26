@@ -72,8 +72,8 @@ class Stats extends Component {
           		color={"#white"}
           		loading={this.state.loading}
         	/>
-      </div>
-					</div>
+      		</div>
+				</div>
 			</div>
 			)
 		} else if(this.state.stats && this.state.stats.status !== "error") {

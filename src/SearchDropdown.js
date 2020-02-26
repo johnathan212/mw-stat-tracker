@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Cookies from 'js-cookie'
 import {Link} from 'react-router-dom'
+import {IoMdCloseCircleOutline} from 'react-icons/io'
 
 function getUsername(url) {
   let username
@@ -58,14 +59,50 @@ class SearchDropdown extends Component {
             paddingBottom: '4px'
           }}>
             <h1 style={{fontSize: '20px', textAlign: 'center'}}>Recent Searches</h1>
-            {this.state.historyArray.map(item =>
-              <div key={`${item}`}>
-                <Link to={`${item}`} style={{color: 'white'}}>
-                  {getUsername(item)}
-                </Link>
-                <button onClick={() => this.deleteHistory(`${item}`)}>x</button>    
-              </div> 
-            )}
+            <div 
+              style={{
+                display: 'flex',
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+                padding: '10px'
+              }}
+            >
+              {this.state.historyArray.map(item =>
+                <div 
+                  key={`${item}`}
+                  style={{
+                    display: 'flex',
+                    flex: '0 0 33.333333%',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <div style={{textAlign: 'left'}}>
+                    <Link 
+                      to={`${item}`} 
+                      style={{
+                        color: 'white',
+                        textDecoration: 'none'
+                      }}
+                    >
+                      {getUsername(item)}
+                    </Link>
+                  </div>
+                  <div style={{paddingRight: '15px'}}>
+                    <button
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        outline: 'none',
+                        cursor: 'pointer'
+                      }} 
+                      onClick={() => this.deleteHistory(`${item}`)}
+                    >
+                      <IoMdCloseCircleOutline style={{color: 'white', fontSize: '15px', paddingTop: '6px'}}/>
+                    </button>    
+                  </div>
+                </div> 
+              )}
+            </div>
           </div>
         )
       } else {

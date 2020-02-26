@@ -26,7 +26,7 @@ class SearchBar extends Component {
   }
 
   handleDropdownChange = (event, platform) => {
-    this.setState({ platform: platform}, () => {console.log(this.state.platform)})
+    this.setState({ platform: platform})
   }
 
   handleChange = event => {
