@@ -2,7 +2,8 @@ ReactJs webapp for looking up player stats in Call of Duty: Modern Warfare
 
 http://mw-stats.herokuapp.com/
 
-
+ ![Homepage](Screenshots/mw-stats.PNG)
+ 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
