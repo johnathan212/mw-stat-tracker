@@ -1,5 +1,6 @@
 ReactJs webapp for looking up player stats in Call of Duty: Modern Warfare
 
+No longer working due to changes to Call of Duty's api authentication
 http://mw-stats.herokuapp.com/
 
  ![Homepage](Screenshots/mw-stats.PNG)
