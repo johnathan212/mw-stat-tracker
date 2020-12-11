@@ -3,7 +3,7 @@
               "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
 
 <svg xmlns="http://www.w3.org/2000/svg"
-     width="25px" height="100%"
+     width="25px" height="25px"
      viewBox="0 0 124 134">
   <path id="Selection"
         fill="currentColor" stroke="currentColor" stroke-width="1"
