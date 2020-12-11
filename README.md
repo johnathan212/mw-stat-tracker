@@ -6,6 +6,7 @@ http://mw-stats.herokuapp.com/
 
  ![Homepage](Screenshots/mw-stats.PNG)
  
+ ![Search](Screenshots/mw-stats.herokuapp.com_battle_user_john%252314729.png)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
