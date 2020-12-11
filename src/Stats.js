@@ -44,7 +44,7 @@ class Stats extends Component {
 	async search(username, platform) {
 		this.setState({ loading: true })
 
-		await Axios.get(`https://my.callofduty.com/api/papi-client/stats/cod/v1/title/mw/platform/${platform}/gamer/${username}/profile/type/mp`)
+		await Axios.get(`https://mw-stats-api-server.herokuapp.com/${platform}/user/${username}`)
 			.then(result => {
 				const data = result.data
 				this.setState({ stats: data })
@@ -77,7 +77,7 @@ class Stats extends Component {
 			</div>
 			)
 		} else if(this.state.stats && this.state.stats.status !== "error") {
-			const lifetimeStats = this.state.stats.data.lifetime.all.properties
+			const lifetimeStats = this.state.stats.lifetime.all.properties
 			
 			let currentCookie = Cookies.get("history")
 			let cookieArray
@@ -98,7 +98,7 @@ class Stats extends Component {
 			let rankStyles = {
 				height: '100px',
 				width: '100px',
-				background: `url("https://www.callofduty.com/cdn/app/icons/mw/ranks/mp/icon_rank_${this.state.stats.data.level}.png")`,
+				background: `url("https://www.callofduty.com/cdn/app/icons/mw/ranks/mp/icon_rank_${this.state.stats.level}.png")`,
 				backgroundSize: 'contain',
 				backgroundRepeat: 'no-repeat'
 			}
@@ -117,9 +117,9 @@ class Stats extends Component {
 						</div>
 					</div>
 					<div id="playerStats">
-						<h1> {this.state.stats.data.username} </h1>
+						<h1> {this.state.stats.username} </h1>
 						<div id="level">
-							<div id="levelText">LEVEL {this.state.stats.data.level} </div>
+							<div id="levelText">LEVEL {this.state.stats.level} </div>
 							<div id="rankImage" style={rankStyles}></div>
 						</div>
 						<div id="lifetimeStats">
@@ -266,10 +266,10 @@ class Stats extends Component {
 							</Collapsible>
 						</div>
 						<div>
-							<WeaponStats weaponStats={this.state.stats.data.lifetime.itemData} />
+							<WeaponStats weaponStats={this.state.stats.lifetime.itemData} />
 						</div>
 						<div>
-							<KillStreakStats killStreakStats={this.state.stats.data.lifetime.scorestreakData} />
+							<KillStreakStats killStreakStats={this.state.stats.lifetime.scorestreakData} />
 						</div>
 						<br></br>
 					</div>

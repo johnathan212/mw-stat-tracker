@@ -6,6 +6,7 @@ import {FaXbox} from 'react-icons/fa'
 import {FaPlaystation} from 'react-icons/fa'
 import {withRouter} from 'react-router-dom'
 import SearchDropdown from './SearchDropdown'
+import {ReactComponent as ActivisionLogo} from './assets/shield.svg'
 
 class SearchBar extends Component {
   constructor(props) {
@@ -86,6 +87,12 @@ class SearchBar extends Component {
               style={(this.state.platform === 'psn') ? this.activeStyle : this.inactiveStyle}
             >
               <FaPlaystation/>
+            </button>
+            <button
+              onClick={ (e) => this.handleDropdownChange(e, 'uno')}
+              style={(this.state.platform === 'uno') ? this.activeStyle : this.inactiveStyle}
+            >
+              <ActivisionLogo/>
             </button>
           </div>
           <div id="form">

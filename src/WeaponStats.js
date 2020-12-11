@@ -228,12 +228,12 @@ function WeaponStats(props) {
       {
         Header: 'kills',
         accessor: 'kills',
-        Cell: props => Number(props.cell.value).toLocaleString('en-US')
+        Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? checkNaN(props.cell.value).toLocaleString('en-US') : checkNaN(props.cell.value)
       },
       {
         Header: 'deaths',
         accessor: 'deaths',
-        Cell: props => Number(props.cell.value).toLocaleString('en-US') 
+        Cell: props => Number.isInteger(checkNaN(props.cell.value)) ? checkNaN(props.cell.value).toLocaleString('en-US') : checkNaN(props.cell.value) 
       },
       {
         Header: 'kd ratio',
