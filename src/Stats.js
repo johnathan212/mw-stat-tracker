@@ -47,7 +47,7 @@ class Stats extends Component {
 		await Axios.get(`https://mw-stats-api-server.herokuapp.com/${platform}/user/${username}`)
 			.then(result => {
 				const data = result.data
-				this.setState({ stats: data })
+				this.setState({ stats: data.data })
 			})
 		this.setState({ loading: false })
 	}
