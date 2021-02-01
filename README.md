@@ -1,6 +1,10 @@
 ReactJs webapp for looking up player stats in Call of Duty: Modern Warfare
 
-No longer working due to changes to Call of Duty's api authentication
+N̶o̶ ̶l̶o̶n̶g̶e̶r̶ ̶w̶o̶r̶k̶i̶n̶g̶ ̶d̶u̶e̶ ̶t̶o̶ ̶c̶h̶a̶n̶g̶e̶s̶ ̶t̶o̶ ̶C̶a̶l̶l̶ ̶o̶f̶ ̶D̶u̶t̶y̶'̶s̶ ̶a̶p̶i̶ ̶a̶u̶t̶h̶e̶n̶t̶i̶c̶a̶t̶i̶o̶n̶
+Working, but Activision now requires you to enable your profile to be viewed publicly.
+https://profile.callofduty.com/cod/prefs
+-Under account linking set Searchable: All
+
 
 http://mw-stats.herokuapp.com/
 
